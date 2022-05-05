@@ -1,0 +1,8 @@
+{
+  "name": "E-credit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "6ec9143b"
+}
