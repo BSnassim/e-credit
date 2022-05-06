@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { NotFoundComponent } from './main/not-found/not-found.component';
@@ -11,6 +12,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,19 @@ import { AppRoutingModule } from './app-routing.module';
     AppMenuComponent,
     NotFoundComponent,
     AccueilComponent,
-    LoginComponent
+    LoginComponent,
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    FormsModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
