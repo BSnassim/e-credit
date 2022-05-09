@@ -1,3 +1,4 @@
+import { AuthGuardGuard } from './auth/guards/auth-guard.guard';
 import { NotFoundComponent } from './main/not-found/not-found.component';
 import { AppMainComponent } from './main/app-main/app-main.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { mainRoutes } from './main/main-routing.module'
 import { authRoutes } from './auth/auth-routing.module';
 
 const routes: Routes = [
-  { path: '', component: AppMainComponent, children:[...mainRoutes] },
+  { path: '', component: AppMainComponent, canActivate:[AuthGuardGuard], children:[...mainRoutes] },
   ...authRoutes,
   { path: 'notfound', component: NotFoundComponent},
   { path: '**', redirectTo: '/notfound'}
