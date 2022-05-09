@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "E-credit",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

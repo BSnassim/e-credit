@@ -7,15 +7,14 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./app-menu.component.scss'],
 })
 export class AppMenuComponent implements OnInit {
-
   public appPages = [
     { title: 'Accueil', url: '/', icon: 'mail' },
     { title: 'Mes credits', url: '/credits', icon: 'paper-plane' },
     { title: 'Demander un credit', url: '/demande', icon: 'heart' },
-    { title: 'Logout', url: '/logout', icon: 'archive' },
+    { title: 'Logout', url: '/login', icon: 'archive' },
   ];
 
-  constructor(private menu: MenuController) { }
+  constructor(private menu: MenuController) {}
 
   ngOnInit() {}
 
@@ -32,5 +31,4 @@ export class AppMenuComponent implements OnInit {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
-
 }
