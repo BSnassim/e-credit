@@ -9,7 +9,7 @@ ion-card-title{
     width: fit-content;
 }
 ion-card {
-    margin-top:40%;    
+    margin-top:40%;
 }
 ion-button{
     margin-top: 20px;
@@ -36,5 +36,14 @@ ion-footer{
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
-    
+}
+.bios{
+    height:20px;
+}
+ion-toggle{
+    float:right;
+}
+#bio{
+    margin-top: 10px;
+    float:left;
 }

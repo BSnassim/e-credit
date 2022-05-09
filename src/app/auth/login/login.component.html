@@ -14,23 +14,27 @@
       <ion-card-header>
         <ion-card-title>Authentification</ion-card-title>
       </ion-card-header>
-    
+
       <ion-card-content>
         <form (submit)="login()" [formGroup]="this.loginForm" name="loginForm">
-        <ion-item>
-          <ion-label position="floating">Identificateur</ion-label>
-          <ion-input type="email" formControlName='email'></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Mot de passe</ion-label>
-          <ion-input type="password" formControlName='password'></ion-input>
-        </ion-item>
-        <ion-button type="submit">Login</ion-button>
-      </form>
+          <ion-item>
+            <ion-label position="floating">Identificateur</ion-label>
+            <ion-input type="email" formControlName='email'></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Mot de passe</ion-label>
+            <ion-input type="password" formControlName='password'></ion-input>
+          </ion-item>
+          <div class="bios">
+            <span id="bio">Authentification avec empreinte</span>
+            <ion-toggle checked="true" color="tertiary"></ion-toggle>
+          </div>
+          <ion-button type="submit">Login</ion-button>
+        </form>
       </ion-card-content>
     </ion-card>
     <ion-footer collapse="fade">
-        <ion-title><small>&#169; GTI - 2022</small></ion-title>
+      <ion-title><small>&#169; GTI - 2022</small></ion-title>
     </ion-footer>
   </div>
 </ion-content>
