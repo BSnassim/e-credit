@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 
@@ -12,12 +13,15 @@ export class AppMenuComponent implements OnInit {
     { title: 'Accueil', url: '/', icon: 'mail' },
     { title: 'Mes credits', url: '/credits', icon: 'paper-plane' },
     { title: 'Demander un credit', url: '/demande', icon: 'heart' },
-    { title: 'Logout', url: '/logout', icon: 'archive' },
   ];
 
-  constructor(private menu: MenuController) { }
+  constructor(private menu: MenuController, private authService:AuthService) { }
 
   ngOnInit() {}
+
+  logout(){
+    this.authService.logout();
+  }
 
   openFirst() {
     this.menu.enable(true, 'first');
