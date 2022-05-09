@@ -1,3 +1,5 @@
+import { FormCreditComponent } from './credit/form-credit/form-credit.component';
+import { ListCreditComponent } from './credit/list-credit/list-credit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { AccueilComponent } from './accueil/accueil.component';
@@ -22,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     NotFoundComponent,
     AccueilComponent,
     LoginComponent,
+    ListCreditComponent,
+    FormCreditComponent
   ],
   entryComponents: [],
   imports: [

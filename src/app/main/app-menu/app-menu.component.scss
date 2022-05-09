@@ -1,13 +1,20 @@
-img{
-    margin-left: 10px;
-    margin-top: 10px;
-    float:left;
+img {
+    height: 65px;
+    width: 65px;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    float: left;
 }
-ion-title{
-    float:right;
-    margin-top:30px;
-    margin-right: 80px;
+ion-title {
+    float: right;
+    margin-top: 30px;
+    margin-right: 0px;
 }
-ion-toolbar{
-    height:80px;
+ion-avatar {
+    height: 80px;
+    width: 80px;
+}
+ion-toolbar {
+    height: 80px;
 }

@@ -1,3 +1,5 @@
+import { User } from './../../models/user';
+import { TokenService } from './../../auth/services/token.service';
 import { AuthService } from './../../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
@@ -9,15 +11,25 @@ import { MenuController } from '@ionic/angular';
 })
 export class AppMenuComponent implements OnInit {
 
+  user ={} as User;
+
   public appPages = [
     { title: 'Accueil', url: '/', icon: 'mail' },
-    { title: 'Mes credits', url: '/credits', icon: 'paper-plane' },
-    { title: 'Demander un credit', url: '/demande', icon: 'heart' },
+    { title: 'Mes credits', url: '/credit/mescredits', icon: 'paper-plane' },
+    { title: 'Demander un credit', url: '/credit/demande', icon: 'heart' },
   ];
 
-  constructor(private menu: MenuController, private authService:AuthService) { }
+  constructor(private menu: MenuController, private authService:AuthService, private tokenService:TokenService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUser();
+  }
+
+  getUser(){
+    this.tokenService.getUser().subscribe( data =>{
+      this.user = data;
+    })
+  }
 
   logout(){
     this.authService.logout();
