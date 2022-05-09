@@ -11,7 +11,6 @@ import { TokenService } from '../services/token.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
 
   constructor(
@@ -19,30 +18,29 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (this.tokenService.getToken()) {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
     this.loginForm = this.formBuilder.group(
       {
-        email: ["", Validators.required],
-        password: ["", Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required],
       },
-      { updateOn: "submit" }
+      { updateOn: 'submit' }
     );
   }
 
   login() {
     let loginUser: LoginUser;
     // Binding data to Model
+    // eslint-disable-next-line prefer-const
     loginUser = { ...this.loginForm.value };
-    this.authService.login(loginUser).subscribe(
-      (response) => {
-        this.tokenService.setToken(response.token);
-        this.router.navigate(["/"]);
-      });
+    this.authService.login(loginUser).subscribe((response) => {
+      this.tokenService.setToken(response.token);
+      this.router.navigate(['/']);
+    });
   }
-
 }
