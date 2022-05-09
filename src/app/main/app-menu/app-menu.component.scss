@@ -1,3 +1,18 @@
+ion-toolbar {
+    --background: #243447c4;
+    color: white;
+}
+ion-content {
+    --background: #243447;
+    color: white;
+}
+ion-item {
+    --background: #243447;
+    color: white;
+}
+ion-list{
+    padding:0px;
+}
 img {
     height: 65px;
     width: 65px;
@@ -6,10 +21,16 @@ img {
     left: 7px;
     float: left;
 }
+ion-icon{
+    color: white;
+}
 ion-title {
     float: right;
+    width:75%;
+    font-size: medium;
     margin-top: 30px;
     margin-right: 0px;
+    padding-left: 0;
 }
 ion-avatar {
     height: 80px;
@@ -17,4 +38,7 @@ ion-avatar {
 }
 ion-toolbar {
     height: 80px;
+}
+#logout{
+    border-top: 1px solid #2b3b4ee1;
 }
