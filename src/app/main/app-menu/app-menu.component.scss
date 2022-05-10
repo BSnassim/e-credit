@@ -1,6 +1,7 @@
 ion-toolbar {
-    --background: #243447c4;
+    --background: #243447dc;
     color: white;
+    height: 80px;
 }
 ion-content {
     --background: #243447;
@@ -35,9 +36,6 @@ ion-title {
 ion-avatar {
     height: 80px;
     width: 80px;
-}
-ion-toolbar {
-    height: 80px;
 }
 #logout{
     border-top: 1px solid #2b3b4ee1;
