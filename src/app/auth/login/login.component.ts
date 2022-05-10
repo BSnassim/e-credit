@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginUser } from 'src/app/models/login-user';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private faio: FingerprintAIO
   ) {}
 
   ngOnInit() {
@@ -30,6 +32,25 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required],
       },
       { updateOn: 'submit' }
+    );
+    this.fingerAuthenticate();
+  }
+
+  fingerAuthenticate() {
+    this.faio.isAvailable().then(
+      () => {
+        this.faio.show({}).then(
+          (val) => {
+            alert(JSON.stringify(val));
+          },
+          (err) => {
+            alert(JSON.stringify(err));
+          }
+        );
+      },
+      (err) => {
+        alert('fingerprint not available');
+      }
     );
   }
 
