@@ -125,6 +125,10 @@ export class DemandeCreditService {
     return this.http.get(this.baseUrl + "/phase");
   }
 
+  getPhaseById(id:number){
+    return this.http.get<any>(this.baseUrl + "/phase/" + id);
+  }
+
   // agence
 
   getListAgences() {
