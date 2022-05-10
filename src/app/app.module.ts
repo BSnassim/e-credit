@@ -3,7 +3,6 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { NotFoundComponent } from './main/not-found/not-found.component';
 import { AppMenuComponent } from './main/app-menu/app-menu.component';
 import { AppMainComponent } from './main/app-main/app-main.component';
-import { NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
@@ -12,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
