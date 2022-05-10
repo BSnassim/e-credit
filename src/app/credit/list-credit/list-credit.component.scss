@@ -23,6 +23,9 @@ ion-label {
     border-bottom: 2px solid #546d8bab;
     width: 80%;
 }
+ion-button {
+    float: right;
+}
 .id {
     font-weight: bold;
 }
@@ -30,4 +33,12 @@ ion-label {
     font-weight: bold;
     margin-left: 5px;
     color: #c0c0c0;
+}
+.etat {
+    text-transform: uppercase;
+    margin-left: 5px;
+    font-size: 12px;
+    border-radius: 2ch;
+    border: 3px solid rgb(126, 98, 228);
+    background-color: rgb(126, 98, 228);
 }
