@@ -18,28 +18,21 @@
 
   <div id="container">
     <!-- Custom Icon -->
-    <ion-accordion-group *ngFor="let d of demandes">
-      <ion-accordion value="'d.id'" toggle-icon="" >
-        <ion-item slot="header">
-          <ion-label><span class="id">Demande n°: {{d.id}}</span><br><span class="date">Crée le: {{d.dateCreation |
-              date: "dd/MM/yyyy"}}</span></ion-label>
-        </ion-item>
+    <div *ngFor="let d of demandes">
+      <ion-item lines="none" button (click)="details(d.id)">
+        <ion-label>
+          <span class="id">Demande n°: {{d.id}}</span>
+          <ion-button *ngIf="d.phase == 4" color="secondary">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button><br>
+          <span class="date">
+            Crée le: {{d.dateCreation | date: "dd/MM/yyyy"}}
+          </span><br>
+          <span class="etat" *ngIf="d.enAttente">{{d.enAttente}}</span>
+        </ion-label>
+      </ion-item>
 
-        <ion-list slot="content" lines="none">
-          <ion-item>
-            <ion-label>{{d.nomprenom}}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>{{d.etat}}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>{{d.montant | currency: " " }} TND</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-button>Détails</ion-button>
-          </ion-item>
-        </ion-list>
-      </ion-accordion>
-    </ion-accordion-group>
+    </div>
+
   </div>
 </ion-content>

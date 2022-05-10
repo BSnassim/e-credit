@@ -1,7 +1,7 @@
 import { Demande } from './../../models/credit/demande';
 import { TokenService } from './../../auth/services/token.service';
 import { DemandeCreditService } from './../../services/demande-credit.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +9,7 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './list-credit.component.html',
   styleUrls: ['./list-credit.component.scss'],
 })
-export class ListCreditComponent implements OnInit {
+export class ListCreditComponent implements OnInit, OnDestroy {
 
   demandes: {
     id: number;
@@ -31,6 +31,10 @@ export class ListCreditComponent implements OnInit {
     private tokenService: TokenService,
     private loadingController: LoadingController
   ) { }
+
+  ngOnDestroy(): void {
+    this.loading.dismiss();
+  }
 
   ngOnInit() {
     this.presentLoading().then(() =>
@@ -88,6 +92,10 @@ export class ListCreditComponent implements OnInit {
   async getPhase(id: number) {
     const prom = await this.demandeCreditService.getPhaseById(id).toPromise();
     return prom;
+  }
+
+  details(id:number){
+
   }
 
 }
