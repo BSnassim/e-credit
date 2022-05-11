@@ -1,5 +1,4 @@
 import { SimulationComponent } from './credit/simulation/simulation.component';
-import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
 import { FormCreditComponent } from './credit/form-credit/form-credit.component';
 import { ListCreditComponent } from './credit/list-credit/list-credit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,15 +7,14 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { NotFoundComponent } from './main/not-found/not-found.component';
 import { AppMenuComponent } from './main/app-menu/app-menu.component';
 import { AppMainComponent } from './main/app-main/app-main.component';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +26,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     LoginComponent,
     ListCreditComponent,
     FormCreditComponent,
-    SimulationComponent
+    SimulationComponent,
   ],
   entryComponents: [],
   imports: [
@@ -37,10 +35,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
+  // providers: [
+  //   FingerprintAIO,
+  // ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -49,8 +51,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     },
     {
       provide: RouteReuseStrategy,
-      useClass: IonicRouteStrategy
-    }],
+      useClass: IonicRouteStrategy,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

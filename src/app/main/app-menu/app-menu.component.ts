@@ -10,8 +10,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./app-menu.component.scss'],
 })
 export class AppMenuComponent implements OnInit {
-
-  user ={} as User;
+  user = {} as User;
 
   public appPages = [
     { title: 'Accueil', url: '/accueil', icon: 'home' },
@@ -20,19 +19,23 @@ export class AppMenuComponent implements OnInit {
     { title: 'Demander un credit', url: '/credit/simulation', icon: 'create' },
   ];
 
-  constructor(private menu: MenuController, private authService:AuthService, private tokenService:TokenService) { }
+  constructor(
+    private menu: MenuController,
+    private authService: AuthService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit() {
     this.getUser();
   }
 
-  getUser(){
-    this.tokenService.getUser().subscribe( data =>{
+  getUser() {
+    this.tokenService.getUser().subscribe((data) => {
       this.user = data;
-    })
+    });
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 
@@ -49,5 +52,4 @@ export class AppMenuComponent implements OnInit {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
-
 }
