@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       // const isFaceId=result.biometryType==BiometryType.FACE_ID;
       // const isFaceId = result.biometryType == BiometryType.FACE_ID;
 
-      if (isAvailable) {
+      if (!isAvailable) {
         // Get user's credentials
         NativeBiometric.getCredentials({
           server: 'www.example.com',
@@ -109,38 +109,6 @@ export class LoginComponent implements OnInit {
   //       });
   //     }
   //   });
-  // }
-
-  // fingerAuthenticate() {
-  //   this.faio.isAvailable().then(
-  //     () => {
-  //       this.faio.show({}).then(
-  //         (val) => {
-  //           alert(JSON.stringify(val));
-  //         },
-  //         (err) => {
-  //           alert(JSON.stringify(err));
-  //         }
-  //       );
-  //     },
-  //     (err) => {
-  //       alert('fingerprint not available');
-  //     }
-  //   );
-  // }
-
-  // fingerAuthenticate() {
-  //   this.faio
-  //     .show({
-  //       clientId: 'fingerprint-demo',
-  //       clientSecret: 'password',
-  //     })
-  //     .then((result) => {
-  //       this.navCtrl.setRoot('');
-  //     })
-  //     .catch((err) => {
-  //       console.log('Err: ', err);
-  //     });
   // }
 
   login() {
