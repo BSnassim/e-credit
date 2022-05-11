@@ -7,6 +7,12 @@ import { TokenService } from '../services/token.service';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { NavController } from '@ionic/angular';
 
+import {
+  AvailableResult,
+  BiometryType,
+  NativeBiometric,
+} from 'capacitor-native-biometric';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,6 +41,40 @@ export class LoginComponent implements OnInit {
       },
       { updateOn: 'submit' }
     );
+  }
+
+  checkCredential() {
+    NativeBiometric.isAvailable().then((result: AvailableResult) => {
+      const isAvailable = result.isAvailable;
+      alert('RESULT ' + JSON.stringify(result));
+      // const isFaceId=result.biometryType==BiometryType.FACE_ID;
+      // const isFaceId = result.biometryType == BiometryType.FACE_ID;
+
+      if (isAvailable) {
+        // Get user's credentials
+        NativeBiometric.getCredentials({
+          server: 'www.example.com',
+        }).then((credentials) => {
+          alert('CREDENTIAL ' + JSON.stringify(credentials));
+          // Authenticate using biometrics before logging the user in
+          NativeBiometric.verifyIdentity({
+            reason: 'For easy log in',
+            title: 'Log in',
+            subtitle: 'Maybe add subtitle here?',
+            description: 'Maybe a description too?',
+          })
+            .then(() => {
+              //     // Authentication successful
+              alert('SUCCESS!!');
+              //     // this.login(credentials.username, credentials.password);
+            })
+            .catch((err) => {
+              //   // Failed to authenticate
+              alert('FAIL!');
+            });
+        });
+      }
+    });
   }
 
   // fingerAuthenticate() {
