@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 export const mainRoutes: Routes = [
-  { path:'', component: AccueilComponent },
+  { path:'accueil', component: AccueilComponent },
+  { path: '', redirectTo:'/accueil',pathMatch:'full'},
   {
     path:'credit', loadChildren: () => CreditModule
   }
