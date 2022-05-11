@@ -12,9 +12,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-// import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     FormsModule,
   ],
   // providers: [
-  //   { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   //   FingerprintAIO,
   // ],
   providers: [
@@ -54,6 +54,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy,
     },
+    FingerprintAIO,
   ],
   bootstrap: [AppComponent],
 })
