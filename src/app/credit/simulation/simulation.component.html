@@ -14,6 +14,52 @@
   </ion-header>
 
   <div id="container">
-    
+
+    <ion-item lines="none">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Type piéce identité</ion-label>
+      <ion-select placeholder="Choisir">
+        <ion-select-option *ngFor="let v of pieceOptions" [value]='v.id'>{{v.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Numero piéce identité</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Numero de compte</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item button="true" id="dateCompte">
+      <ion-label>Date ouverture de compte</ion-label>
+      <ion-text slot="end">{{ simulation.dateCompte | date:"dd/MM/yyyy" }}</ion-text>
+      <ion-popover trigger="dateCompte" show-backdrop="false">
+        <ng-template>
+          <ion-datetime #popoverDatetime presentation="date"
+            (ionChange)="simulation.dateCompte = formatDate(popoverDatetime.value)">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <ion-item button="true" id="dateNais">
+      <ion-label>Date de naissance</ion-label>
+      <ion-text slot="end">{{ simulation.dateNaissance | date:"dd/MM/yyyy" }}</ion-text>
+      <ion-popover trigger="dateNais" show-backdrop="false">
+        <ng-template>
+          <ion-datetime #popoverDatetime presentation="date"
+            (ionChange)="simulation.dateNaissance = formatDate(popoverDatetime.value)">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+
   </div>
 </ion-content>
