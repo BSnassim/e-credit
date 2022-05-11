@@ -7,20 +7,21 @@ import { Router } from '@angular/router';
 import { LoginUser } from 'src/app/models/login-user';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-    baseUrl = environment.apiURL;
-    constructor(private http: HttpClient,
-        private tokenService: TokenService,
-        private router: Router,
-        ) { }
+  baseUrl = environment.apiURL;
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService,
+    private router: Router
+  ) {}
 
-    login(u: LoginUser): Observable<any> {
-        return this.http.post(this.baseUrl + '/authenticate', u);
-    }
-    logout() {
-        this.tokenService.removeToken();
-        this.router.navigate(['/login']);
-    }
+  login(u: LoginUser): Observable<any> {
+    return this.http.post(this.baseUrl + '/authenticate', u);
+  }
+  logout() {
+    this.tokenService.removeToken();
+    this.router.navigate(['/login']);
+  }
 }
