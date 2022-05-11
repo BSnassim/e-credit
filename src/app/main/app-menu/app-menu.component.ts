@@ -14,10 +14,10 @@ export class AppMenuComponent implements OnInit {
   user ={} as User;
 
   public appPages = [
-    { title: 'Accueil', url: '/', icon: 'home' },
+    { title: 'Accueil', url: '/accueil', icon: 'home' },
     { title: 'Notifications', url: '/notfound', icon: 'notifications' },
     { title: 'Mes credits', url: '/credit/mescredits', icon: 'bar-chart' },
-    { title: 'Demander un credit', url: '/credit/demande', icon: 'create' },
+    { title: 'Demander un credit', url: '/credit/simulation', icon: 'create' },
   ];
 
   constructor(private menu: MenuController, private authService:AuthService, private tokenService:TokenService) { }

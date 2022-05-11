@@ -1,3 +1,4 @@
+import { SimulationComponent } from './credit/simulation/simulation.component';
 import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
 import { FormCreditComponent } from './credit/form-credit/form-credit.component';
 import { ListCreditComponent } from './credit/list-credit/list-credit.component';
@@ -26,7 +27,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AccueilComponent,
     LoginComponent,
     ListCreditComponent,
-    FormCreditComponent
+    FormCreditComponent,
+    SimulationComponent
   ],
   entryComponents: [],
   imports: [
