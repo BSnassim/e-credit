@@ -40,11 +40,13 @@ export class LoginComponent implements OnInit {
       { updateOn: 'submit' }
     );
   }
-
+  routingpage() {
+    this.router.navigate(['/validation1']);
+  }
   checkCredential() {
     NativeBiometric.isAvailable().then((result: AvailableResult) => {
       const isAvailable = result.isAvailable;
-      alert('RESULT ' + JSON.stringify(result));
+      // alert('RESULT ' + JSON.stringify(result));
       // const isFaceId=result.biometryType==BiometryType.FACE_ID;
       // const isFaceId = result.biometryType == BiometryType.FACE_ID;
 
@@ -52,8 +54,8 @@ export class LoginComponent implements OnInit {
         // Get user's credentials
         NativeBiometric.getCredentials({
           server: 'www.example.com',
-        }).then((credentials) => {
-          alert('CREDENTIAL ' + JSON.stringify(credentials));
+        }).then(() => {
+          // alert('CREDENTIAL ' + JSON.stringify(credentials));
           // Authenticate using biometrics before logging the user in
           NativeBiometric.verifyIdentity({
             reason: 'For easy log in',
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
           })
             .then(() => {
               //     // Authentication successful
-              alert('SUCCESS!!');
+              this.router.navigate(['/validation1']);
               //     // this.login(credentials.username, credentials.password);
             })
             .catch((err) => {
@@ -74,6 +76,40 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  // checkCredential() {
+  //   NativeBiometric.isAvailable().then((result: AvailableResult) => {
+  //     const isAvailable = result.isAvailable;
+  //     alert('RESULT ' + JSON.stringify(result));
+  //     // const isFaceId=result.biometryType==BiometryType.FACE_ID;
+  //     // const isFaceId = result.biometryType == BiometryType.FACE_ID;
+
+  //     if (isAvailable) {
+  //       // Get user's credentials
+  //       NativeBiometric.getCredentials({
+  //         server: 'www.example.com',
+  //       }).then((credentials) => {
+  //         alert('CREDENTIAL ' + JSON.stringify(credentials));
+  //         // Authenticate using biometrics before logging the user in
+  //         NativeBiometric.verifyIdentity({
+  //           reason: 'For easy log in',
+  //           title: 'Log in',
+  //           subtitle: 'Maybe add subtitle here?',
+  //           description: 'Maybe a description too?',
+  //         })
+  //           .then(() => {
+  //             //     // Authentication successful
+  //             this.router.navigate(['/validation1']);
+  //             //     // this.login(credentials.username, credentials.password);
+  //           })
+  //           .catch((err) => {
+  //             //   // Failed to authenticate
+  //             alert('FAIL!');
+  //           });
+  //       });
+  //     }
+  //   });
+  // }
 
   // fingerAuthenticate() {
   //   this.faio.isAvailable().then(

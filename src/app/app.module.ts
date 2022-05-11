@@ -15,6 +15,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
+import { SuccessfullValidationComponent } from './auth/fingerprintVatidation/successfull-validation/successfull-validation.component';
+import { Validation1Component } from './auth/fingerprintVatidation/validation1/validation1.component';
+import { Validation2Component } from './auth/fingerprintVatidation/validation2/validation2.component';
+import { Validation3Component } from './auth/fingerprintVatidation/validation3/validation3.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.in
     NotFoundComponent,
     AccueilComponent,
     LoginComponent,
+    Validation1Component,
+    Validation2Component,
+    Validation3Component,
+    SuccessfullValidationComponent,
     ListCreditComponent,
     FormCreditComponent,
     SimulationComponent,
@@ -40,9 +48,6 @@ import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.in
     ReactiveFormsModule,
     FormsModule,
   ],
-  // providers: [
-  //   FingerprintAIO,
-  // ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

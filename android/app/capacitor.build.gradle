@@ -13,16 +13,10 @@ dependencies {
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-status-bar')
-<<<<<<< HEAD
     implementation project(':capacitor-native-biometric')
 
 }
 apply from: "../../node_modules/cordova-plugin-fingerprint-aio/src/android/build.gradle"
-=======
-
-}
-
->>>>>>> origin/master
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
