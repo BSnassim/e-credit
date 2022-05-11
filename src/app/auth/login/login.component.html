@@ -7,8 +7,10 @@
   </ion-header>
 
   <div id="container">
-    <ion-img class="logo" [src]="'assets/images/logo.png'"></ion-img>
-    <ion-img class="name" [src]="'assets/images/appname.png'"></ion-img>
+    <div class="logos">
+      <ion-img class="logo" [src]="'assets/images/logo.png'"></ion-img>
+      <ion-img class="name" [src]="'assets/images/appname.png'"></ion-img>
+    </div>
     <ion-card>
       <ion-card-header>
         <ion-card-title>Authentification</ion-card-title>
@@ -24,21 +26,11 @@
             <ion-label position="floating">Mot de passe</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
+          <div class="bios">
+            <span id="bio">Authentification avec empreinte</span>
+            <ion-toggle checked="true" color="tertiary"></ion-toggle>
+          </div>
           <ion-button type="submit">Login</ion-button>
-          <!-- <ion-row align-items-center>
-            <ion-col col-5></ion-col>
-            <ion-col col-2>
-              <img
-                src="assets/icon/validfingergif.gif"
-                tappable
-                (click)="fingerAuthenticate()"
-              />
-            </ion-col>
-            <ion-col col-5></ion-col>
-          </ion-row> -->
-          <ion-button (click)="checkCredential()">
-            Check Credential
-          </ion-button>
         </form>
       </ion-card-content>
     </ion-card>

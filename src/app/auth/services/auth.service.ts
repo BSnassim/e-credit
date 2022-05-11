@@ -22,7 +22,6 @@ export class AuthService {
   }
   logout() {
     this.tokenService.removeToken();
-    sessionStorage.removeItem('permissions');
     this.router.navigate(['/login']);
   }
 }

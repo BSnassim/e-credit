@@ -2,39 +2,48 @@ ion-content {
     --background: rgb(8, 19, 38);
     --background: linear-gradient(53deg, rgba(8, 19, 38, 1) 1%, rgba(17, 42, 105, 1) 33%, rgba(42, 145, 223, 1) 100%);
 }
-ion-card-title{
+ion-card-title {
     font-weight: bold;
     margin-right: auto;
     margin-left: auto;
     width: fit-content;
 }
 ion-card {
-    margin-top:40%;    
+    margin-top: 10%;
 }
-ion-button{
+ion-button {
     margin-top: 20px;
     display: flex;
     justify-content: center;
 }
-ion-img.logo{
-    position:absolute;
+.logos {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+}
+ion-img.logo {
     height: 100px;
     width: 100px;
-    top:5%;
-    left:18%;
 }
-ion-img.name{
-    position:absolute;
+ion-img.name {
+    margin-left: 5px;
     height: 100px;
     width: 100px;
-    top:5%;
-    left:45%;
 }
-ion-footer{
+ion-footer {
     color: white;
     padding-left: 1px;
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
-    
+}
+.bios {
+    height: 20px;
+}
+ion-toggle {
+    float: right;
+}
+#bio {
+    margin-top: 10px;
+    float: left;
 }

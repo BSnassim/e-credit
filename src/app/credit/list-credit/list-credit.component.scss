@@ -1,0 +1,33 @@
+ion-item {
+    --background: #243447da;
+    color: aliceblue;
+}
+ion-list {
+    padding: 0px;
+}
+ion-label {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif !important;
+    border-bottom: 2px solid #546d8bab;
+    width: 80%;
+}
+ion-button {
+    float: right;
+}
+.id {
+    font-weight: bold;
+}
+.date {
+    font-weight: bold;
+    margin-left: 5px;
+    color: #c0c0c0;
+}
+.etat {
+    text-transform: uppercase;
+    margin-left: 5px;
+    font-size: 12px;
+    border-radius: 2ch;
+    border: 3px solid rgb(126, 98, 228);
+    background-color: rgb(126, 98, 228);
+}

@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mes credits</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+    <!-- Custom Icon -->
+    <div *ngFor="let d of demandes">
+      <ion-item lines="none" button (click)="details(d.id)">
+        <ion-label>
+          <span class="id">Demande n°: {{d.id}}</span>
+          <ion-button *ngIf="d.phase == 4" color="secondary">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button><br>
+          <span class="date">
+            Crée le: {{d.dateCreation | date: "dd/MM/yyyy"}}
+          </span><br>
+          <span class="etat" *ngIf="d.enAttente">{{d.enAttente}}</span>
+        </ion-label>
+      </ion-item>
+
+    </div>
+
+  </div>
+</ion-content>

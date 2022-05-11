@@ -1,7 +1,8 @@
 {
   "name": "E-credit",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "id": "6ec9143b"
