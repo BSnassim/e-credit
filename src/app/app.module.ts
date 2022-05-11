@@ -12,7 +12,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
@@ -54,7 +53,6 @@ import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.in
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy,
     },
-    FingerprintAIO,
   ],
   bootstrap: [AppComponent],
 })

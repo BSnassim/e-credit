@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { LoginUser } from 'src/app/models/login-user';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
-import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { NavController } from '@ionic/angular';
 
 import {
@@ -26,7 +25,6 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
-    private faio: FingerprintAIO,
     public navCtrl: NavController
   ) {}
 
