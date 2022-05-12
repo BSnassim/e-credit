@@ -1,0 +1,40 @@
+ion-content{
+  --background: url(../../../../assets/images/back2.png) no-repeat center center / cover;
+}
+
+.logos {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+ion-img.logo {
+  height: 100px;
+  width: 100px;
+}
+p{
+  text-align: center;
+  color: #fff;
+  // transform: translateY(55vh);
+  margin-left: 10px;
+
+}
+
+ul{
+  color: #fff;
+  font-size: 14px;
+}
+
+h2{
+  text-align: center;
+  color: #fff;
+  margin-left: 10px;
+
+//  transform: translateY(53vh);
+}
+
+.section {
+ transform: translateY(60vh);
+}
+
+

@@ -1,2 +1,37 @@
-<p>validation2 works!</p>
-<ion-button (click)="routingpage3()"> validation2 page </ion-button>
+<ion-content fullscreen="true">
+  <div class="logos">
+    <ion-img class="logo" [src]="'assets/icon/finger2.png'"></ion-img>
+  </div>
+  <h2><b>Connecter vous d'un simple geste</b></h2>
+  <p>Activer la connaixion par empreinte digitale</p>
+
+  <ul>
+    <ion-icon name="checkmark"></ion-icon>
+    Cette fonctionnalité ne doit être activée que si vous êtes la seule personne
+    à avoir enregistré vos empreintes digitales sur cet appareil.<br />
+    <ion-icon name="checkmark"></ion-icon>
+    Assurez-vous d'être la seule personne à pouvoir déverrouiller votre
+    téléphone<br />
+
+    <ion-icon name="checkmark"></ion-icon>
+    Vos empreintes digitales sont uniquement stockées sur cet appareil et ne
+    sont en aucun cas acessibles ou communiquées E-Credit.<br />
+
+    <ion-icon name="checkmark"></ion-icon>
+    La fonctionnalité peut à tout moment être désactivée dans les réglages de
+    l'application<br />
+  </ul>
+  <div class="section ion-margin-horizontal ion-padding-horizontal">
+    <ion-button
+      expand="block"
+      shape="round"
+      color="success"
+      (click)="routingpage3()"
+    >
+      ACTIVER
+    </ion-button>
+    <ion-button fill="outline" expand="block" shape="round" color="light">
+      PLUS TARD
+    </ion-button>
+  </div>
+</ion-content>

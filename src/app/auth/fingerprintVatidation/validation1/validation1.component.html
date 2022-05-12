@@ -1,2 +1,21 @@
-<p>validation1 works!</p>
-<ion-button (click)="routingpage2()"> validation2 page </ion-button>
+<ion-content fullscreen="true">
+  <h3><b>Activer la connexion par empreinte digitale</b></h3>
+  <p>
+    La reconnaissance d'empreinte digitale est déjà disponible sur votre
+    mobile.<br />
+    Profitez-en pour vous connecter à votre application d'un simple geste !
+  </p>
+  <div class="section ion-margin-horizontal ion-padding-horizontal">
+    <ion-button
+      expand="block"
+      shape="round"
+      color="success"
+      (click)="routingpage2()"
+    >
+      SUIVANT
+    </ion-button>
+    <ion-button fill="outline" expand="block" shape="round" color="light">
+      PLUS TARD
+    </ion-button>
+  </div>
+</ion-content>
