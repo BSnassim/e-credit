@@ -1,3 +1,8 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DemandeCreditService } from './../../services/demande-credit.service';
+import { SimulationService } from './../../services/simulation.service';
+import { TokenService } from './../../auth/services/token.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Simulation } from 'src/app/models/credit/simulation';
 import { TypeCredit } from 'src/app/models/credit/type-credit';
@@ -14,38 +19,118 @@ export class SimulationComponent implements OnInit {
 
   date;
 
-  echeanceOptions = [{ id: 1, name: 'Mois' }, { id: 2, name: 'An' }];
-  selectedEcheance = {} as { id: number, name: string };
+  simForm: FormGroup;
 
-  familialeOptions = [{ id: 1, name: "Marié(e)" }, { id: 2, name: "Célibataire" }, { id: 3, name: "Divorcé(e)" }, { id: 4, name: "Veuf(ve)" }];
-  selectedFamiliale = {} as { id: number, name: string };
+  echeanceOptions = ['Mois', 'An'];
+  selectedEcheance: string;
 
-  emploiOptions = [{ id: 1, name: 'Salarié' }, { id: 2, name: "Fonction libérale" }, { id: 3, name: "Retraité" }, { id: 4, name: "Rentier" }];
-  selectedEmploi = {} as { id: number, name: string };
+  familialeOptions = ["Marié(e)", "Célibataire", "Divorcé(e)", "Veuf(ve)"];
+  selectedFamiliale: string;
 
-  medicaleOptions = [{ id: 1, name: 'Bon santé' }, { id: 2, name: "Maladie chronique" }];
-  selectedMedicale = {} as { id: number, name: string };
+  emploiOptions = ['Salarié', "Fonction libérale", "Retraité", "Rentier"];
+  selectedEmploi: string;
 
-  logementOptions = [{ id: 1, name: 'Locataire' }, { id: 2, name: "Propriétaire" }];
-  selectedLogement = {} as { id: number, name: string };
+  medicaleOptions = ['Bon santé', "Maladie chronique"];
+  selectedMedicale: string;
 
-  pieceOptions = [{ id: 1, name: "CIN" }, { id: 2, name: "Passeport" }];
-  selectedPiece = {} as { id: number, name: string };
+  logementOptions = ['Locataire', "Propriétaire"];
+  selectedLogement: string;
+
+  pieceOptions = ["CIN", "Passeport"];
+  selectedPiece: string;
 
   typesCredit: TypeCredit[];
   selectedCredit: TypeCredit;
 
   simulation = {} as Simulation;
 
-  constructor() { }
+  UserId: number;
 
-  ngOnInit() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private tokenService: TokenService,
+    private simulationService: SimulationService,
+    private demandeService: DemandeCreditService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    this.getUserID();
+    this.getTypeCredit();
+    this.simForm = this.formBuilder.group(
+      {
+        nom: ['', Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/)])],
+        prenom: ['', Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/)])],
+        typePiece: ['', Validators.required],
+        numPiece: ['', Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z0-9]+$/)])],
+        numCompte: ['', Validators.compose([Validators.required, Validators.minLength(13), Validators.pattern(/^[A-Za-z0-9]+$/)])],
+        dateCompte: ['', Validators.required],
+        dateNaissance: ['', Validators.required],
+        sitFamiliale: ['', Validators.required],
+        sitMedicale: ['', Validators.required],
+        sitProfessionnel: ['', Validators.required],
+        gsm: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(/^[0-9]+$/)])],
+        montant: ['', Validators.compose([Validators.required, ])],
+        nbreEcheance: ['', Validators.compose([Validators.required, ])],
+        unite: ['', Validators.required],
+        typeCredit: ['', Validators.required],
+        salaire: ['', Validators.compose([Validators.required, ])],
+        autreRevenu: ['', Validators.compose([Validators.required, ])],
+        sitLogement: ['', Validators.required]
+      },
+      { updateOn: 'change' }
+    );
+    this.simForm.get('typePiece').valueChanges.subscribe(value => {
+      if (value == "CIN") {
+        this.simForm.controls.numPiece.setValue(null);
+        this.simForm.get('numPiece').setValidators(Validators.compose([
+          Validators.required,
+          Validators.maxLength(8),
+          Validators.minLength(8)
+        ]))
+      } else if (value == "Passeport") {
+        this.simForm.controls.numPiece.setValue(null);
+        this.simForm.get('numPiece').setValidators(Validators.compose([
+          Validators.required,
+          Validators.maxLength(9),
+          Validators.minLength(9)
+        ]))
+      }
+    });
+  }
 
   formatDate(value: string) {
     let date = format(parseISO(value), 'dd/MM/yyyy');
     let dateParts = date.split("/");
-    let dateObject = new Date(+dateParts[2], +dateParts[1]-1, +dateParts[0]);
+    let dateObject = new Date(+dateParts[2], +dateParts[1] - 1, +dateParts[0]);
     return dateObject;
+  }
+
+  getUserID() {
+    this.tokenService.getUser().subscribe(
+      data => {
+        this.UserId = data.id;
+      }
+    )
+  }
+
+  getTypeCredit() {
+    this.demandeService.getTypeCreditAPI().subscribe((response) => {
+      this.typesCredit = response;
+    });
+  }
+
+  maxNumPiece() {
+    if (this.simForm.value.typePiece == "CIN") {
+      return 8;
+    } else if (this.simForm.value.typePiece == "Passeport") {
+      return 9;
+    } else return 8;
+  }
+
+  submit() {
+
   }
 
 }

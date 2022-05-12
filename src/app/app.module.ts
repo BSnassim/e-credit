@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
+import { NgxPopperModule } from 'ngx-popper';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.in
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
+    NgxPopperModule.forRoot({})
   ],
   // providers: [
   //   FingerprintAIO,

@@ -14,52 +14,137 @@
   </ion-header>
 
   <div id="container">
+    <form (submit)="submit()" [formGroup]="this.simForm" name="simForm">
+      {{simForm.value |json}}
+      <ion-item lines="none">
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input formControlName="nom"></ion-input>
+      </ion-item>
 
-    <ion-item lines="none">
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="floating">Prénom</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Type piéce identité</ion-label>
-      <ion-select placeholder="Choisir">
-        <ion-select-option *ngFor="let v of pieceOptions" [value]='v.id'>{{v.name}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="floating">Numero piéce identité</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="floating">Numero de compte</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item button="true" id="dateCompte">
-      <ion-label>Date ouverture de compte</ion-label>
-      <ion-text slot="end">{{ simulation.dateCompte | date:"dd/MM/yyyy" }}</ion-text>
-      <ion-popover trigger="dateCompte" show-backdrop="false">
-        <ng-template>
-          <ion-datetime #popoverDatetime presentation="date"
-            (ionChange)="simulation.dateCompte = formatDate(popoverDatetime.value)">
-          </ion-datetime>
-        </ng-template>
-      </ion-popover>
-    </ion-item>
-    <ion-item button="true" id="dateNais">
-      <ion-label>Date de naissance</ion-label>
-      <ion-text slot="end">{{ simulation.dateNaissance | date:"dd/MM/yyyy" }}</ion-text>
-      <ion-popover trigger="dateNais" show-backdrop="false">
-        <ng-template>
-          <ion-datetime #popoverDatetime presentation="date"
-            (ionChange)="simulation.dateNaissance = formatDate(popoverDatetime.value)">
-          </ion-datetime>
-        </ng-template>
-      </ion-popover>
-    </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input formControlName="prenom"></ion-input>
+      </ion-item>
 
+      <ion-item class="bubble">
+        <ion-label>Type piéce identité</ion-label>
+        <ion-select placeholder="Choisir" formControlName="typePiece">
+          <ion-select-option *ngFor="let v of pieceOptions" [value]='v'>{{v}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Numero piéce identité</ion-label>
+        <ion-input inputmode="numeric" formControlName="numPiece" [maxlength]="maxNumPiece()"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Numero de compte</ion-label>
+        <ion-input inputmode="numeric" maxlength="13" formControlName="numCompte">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">GSM</ion-label>
+        <ion-input inputmode="tel" maxlength="8" formControlName="gsm"></ion-input>
+      </ion-item>
+
+      <ion-item button="true" id="dateCompte" class="bubble">
+        <ion-label>Date ouverture de compte</ion-label>
+        <ion-text slot="end">{{ simulation.dateCompte | date:"dd/MM/yyyy" }}</ion-text>
+        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateCompte">
+          <ng-template>
+            <ion-datetime #modalDatetime1 presentation="date" formControlName="dateCompte"
+              (ionChange)="simulation.dateCompte = formatDate(modalDatetime1.value)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
+      <ion-item button="true" id="dateNais" class="bubble">
+        <ion-label>Date de naissance</ion-label>
+        <ion-text slot="end">{{ simulation.dateNaissance | date:"dd/MM/yyyy" }}</ion-text>
+        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateNais">
+          <ng-template>
+            <ion-datetime #modalDatetime presentation="date" formControlName="dateNaissance"
+              (ionChange)="simulation.dateNaissance = formatDate(modalDatetime.value)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
+      <ion-item class="bubble">
+        <ion-label>Situation familiale</ion-label>
+        <ion-select placeholder="Choisir" formControlName="sitFamiliale">
+          <ion-select-option *ngFor="let v of familialeOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="bubble">
+        <ion-label>Situation medicale</ion-label>
+        <ion-select placeholder="Choisir" formControlName="sitMedicale">
+          <ion-select-option *ngFor="let v of medicaleOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="bubble">
+        <ion-label>Statut professionnel</ion-label>
+        <ion-select placeholder="Choisir" formControlName="sitProfessionnel">
+          <ion-select-option *ngFor="let v of emploiOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Salaire mensuel</ion-label>
+        <ion-input inputmode="decimal" type="number" formControlName="salaire"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Autre revenu</ion-label>
+        <ion-input inputmode="decimal" type="number" formControlName="autreRevenu"></ion-input>
+      </ion-item>
+
+      <ion-item class="bubble">
+        <ion-label>Situation logement</ion-label>
+        <ion-select placeholder="Choisir" formControlName="sitLogement">
+          <ion-select-option *ngFor="let v of logementOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="bubble">
+        <ion-label>Type de credit</ion-label>
+        <ion-select placeholder="Choisir" formControlName="typeCredit">
+          <ion-select-option *ngFor="let v of typesCredit" [value]='v.idType'>{{v.libcredit}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Montant</ion-label>
+        <ion-input inputmode="decimal" type="number" formControlName="montant"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Nombre d'écheances</ion-label>
+        <ion-input type="number" inputmode="numeric" maxlength="3" formControlName="nbreEcheance">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="bubble">
+        <ion-label>Par</ion-label>
+        <ion-select placeholder="Choisir" formControlName="unite">
+          <ion-select-option *ngFor="let v of echeanceOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      {{simForm.valid}}
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button type="submit" shape="round">Simuler</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
 
   </div>
 </ion-content>
