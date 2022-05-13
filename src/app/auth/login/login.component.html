@@ -1,10 +1,5 @@
 <ion-header [translucent]="true"> </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">large title</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div id="container">
     <div class="logos">
@@ -27,7 +22,7 @@
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
           <div class="bios">
-            <span id="bio">Authentification avec empreinte</span>
+            <span id="bio">Login par empreinte</span>
             <ion-toggle checked="true" color="tertiary"></ion-toggle>
           </div>
           <ion-button (click)="checkCredential()">

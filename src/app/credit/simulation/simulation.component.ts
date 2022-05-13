@@ -17,6 +17,78 @@ import { IonDatetime } from '@ionic/angular';
 export class SimulationComponent implements OnInit {
   @ViewChild(IonDatetime, { static: true }) datetime: IonDatetime;
 
+  validation_messages = {
+    'nom': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Le nom ne doit pas contenir de caractères spéciaux.'}
+    ],
+    'prenom': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Le prenom ne doit pas contenir de caractères spéciaux.'}
+    ],
+    'typePiece': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'numPiece': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Numéro invalide.'},
+      {type: 'maxlength', message: 'Numéro invalide.'},
+      {type: 'minlength', message: 'Numéro invalide.'}
+    ],
+    'numCompte': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Numéro de compte invalide.'},
+      {type: 'minlength', message: 'Le numéro de compte doit contenir 13 chiffres.'}
+    ],
+    'dateCompte': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'dateNaissance': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'sitFamiliale': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'sitMedicale': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'sitProfessionnel': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'gsm': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Le numéro de telephone doit contenir que des chiffres.'},
+      {type: 'minlength', message: 'Le numéro de telephone doit contenir 8 chiffres.'}
+    ],
+    'montant': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Le montant doit contenir que des chiffres.'}
+    ],
+    'nbreEcheance': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Ce champ doit contenir que des chiffres'},
+      {type: 'max', message: 'Le nombre maximales des echeances est : [Par mois: 360, Par an: 30].'},
+      {type: 'min', message: 'Le nombre minimales des echeances est 1.'}
+    ],
+    'unite': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'typeCredit': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],
+    'salaire': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Ce champ doit contenir que des chiffres'},
+    ],
+    'autreRevenu': [
+      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'pattern', message: 'Ce champ doit contenir que des chiffres'},
+    ],
+    'sitLogement': [
+      {type: 'required', message: 'Ce champ est obligatoire.'}
+    ],  
+  }
+
   date;
 
   simForm: FormGroup;
@@ -52,7 +124,7 @@ export class SimulationComponent implements OnInit {
     private simulationService: SimulationService,
     private demandeService: DemandeCreditService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -71,30 +143,58 @@ export class SimulationComponent implements OnInit {
         sitMedicale: ['', Validators.required],
         sitProfessionnel: ['', Validators.required],
         gsm: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(/^[0-9]+$/)])],
-        montant: ['', Validators.compose([Validators.required, ])],
-        nbreEcheance: ['', Validators.compose([Validators.required, ])],
+        montant: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
+        nbreEcheance: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
         unite: ['', Validators.required],
         typeCredit: ['', Validators.required],
-        salaire: ['', Validators.compose([Validators.required, ])],
-        autreRevenu: ['', Validators.compose([Validators.required, ])],
+        salaire: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
+        autreRevenu: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
         sitLogement: ['', Validators.required]
       },
       { updateOn: 'change' }
     );
+    this.controlNumPieceInput();
+    this.controlEcheanceInput();
+  }
+
+  controlNumPieceInput() {
     this.simForm.get('typePiece').valueChanges.subscribe(value => {
       if (value == "CIN") {
         this.simForm.controls.numPiece.setValue(null);
         this.simForm.get('numPiece').setValidators(Validators.compose([
           Validators.required,
           Validators.maxLength(8),
-          Validators.minLength(8)
+          Validators.minLength(8),
+          Validators.pattern(/^[0-9]+$/)
         ]))
       } else if (value == "Passeport") {
         this.simForm.controls.numPiece.setValue(null);
         this.simForm.get('numPiece').setValidators(Validators.compose([
           Validators.required,
           Validators.maxLength(9),
-          Validators.minLength(9)
+          Validators.minLength(9),
+          Validators.pattern(/^[A-Za-z0-9]+$/)
+        ]))
+      }
+    });
+  }
+  controlEcheanceInput() {
+    this.simForm.get('unite').valueChanges.subscribe(value => {
+      if (value == "Mois") {
+        this.simForm.controls.nbreEcheance.setValue(null);
+        this.simForm.get('nbreEcheance').setValidators(Validators.compose([
+          Validators.required,
+          Validators.max(360),
+          Validators.min(1), 
+          Validators.pattern(/^[0-9]+$/)
+        ]))
+      } else if (value == "An") {
+        this.simForm.controls.nbreEcheance.setValue(null);
+        this.simForm.get('nbreEcheance').setValidators(Validators.compose([
+          Validators.required,
+          Validators.max(30),
+          Validators.min(1), 
+          Validators.pattern(/^[0-9]+$/)
         ]))
       }
     });

@@ -32,10 +32,9 @@ ion-img.name {
 }
 ion-footer {
     color: white;
-    padding-left: 1px;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
+    text-align: center;
+    position:fixed;
+    bottom:0;
 }
 .bios {
     height: 20px;
