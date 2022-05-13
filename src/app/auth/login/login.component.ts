@@ -46,16 +46,16 @@ export class LoginComponent implements OnInit {
   checkCredential() {
     NativeBiometric.isAvailable().then((result: AvailableResult) => {
       const isAvailable = result.isAvailable;
-      // alert('RESULT ' + JSON.stringify(result));
+      alert('RESULT ' + JSON.stringify(result));
       // const isFaceId=result.biometryType==BiometryType.FACE_ID;
       // const isFaceId = result.biometryType == BiometryType.FACE_ID;
 
-      if (!isAvailable) {
+      if (isAvailable) {
         // Get user's credentials
         NativeBiometric.getCredentials({
           server: 'www.example.com',
-        }).then(() => {
-          // alert('CREDENTIAL ' + JSON.stringify(credentials));
+        }).then((credentials) => {
+          alert('CREDENTIAL ' + JSON.stringify(credentials));
           // Authenticate using biometrics before logging the user in
           NativeBiometric.verifyIdentity({
             reason: 'For easy log in',

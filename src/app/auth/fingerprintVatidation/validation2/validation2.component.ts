@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./validation2.component.scss'],
 })
 export class Validation2Component implements OnInit {
+  checked = false;
+
   constructor(private router: Router) {}
 
   ngOnInit() {}
