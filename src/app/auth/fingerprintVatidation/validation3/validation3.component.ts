@@ -12,12 +12,22 @@ export class Validation3Component implements OnInit {
   constructor(private router: Router, public navCtrl: NavController) {}
 
   ngOnInit() {
-    this.checkCredential();
+    this.setCredential();
+    this.associate();
   }
-  checkCredential() {
+
+  setCredential() {
+    // Save user's credentials
+    NativeBiometric.setCredentials({
+      username: 'username',
+      password: 'password',
+      server: 'www.example.com',
+    }).then();
+  }
+  associate() {
     NativeBiometric.isAvailable().then((result: AvailableResult) => {
       const isAvailable = result.isAvailable;
-      alert('RESULT ' + JSON.stringify(result));
+      // alert('RESULT ' + JSON.stringify(result));
       // const isFaceId=result.biometryType==BiometryType.FACE_ID;
       // const isFaceId = result.biometryType == BiometryType.FACE_ID;
 
@@ -26,17 +36,16 @@ export class Validation3Component implements OnInit {
         NativeBiometric.getCredentials({
           server: 'www.example.com',
         }).then((credentials) => {
-          alert('CREDENTIAL ' + JSON.stringify(credentials));
+          // alert('CREDENTIAL ' + JSON.stringify(credentials));
           // Authenticate using biometrics before logging the user in
           NativeBiometric.verifyIdentity({
             reason: 'For easy log in',
-            title: 'Log in',
-            subtitle: 'Maybe add subtitle here?',
-            description: 'Maybe a description too?',
+            title: 'Association',
+            description: 'Scanner votre empreinte',
           })
             .then(() => {
               //     // Authentication successful
-              this.router.navigate(['/validation1']);
+              this.router.navigate(['/successfullValidation']);
               //     // this.login(credentials.username, credentials.password);
             })
             .catch((err) => {
