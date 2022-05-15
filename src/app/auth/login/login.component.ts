@@ -6,11 +6,11 @@ import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 import { NavController } from '@ionic/angular';
 
-import {
-  AvailableResult,
-  BiometryType,
-  NativeBiometric,
-} from 'capacitor-native-biometric';
+// import {
+//   AvailableResult,
+//   BiometryType,
+//   NativeBiometric,
+// } from 'capacitor-native-biometric';
 
 @Component({
   selector: 'app-login',

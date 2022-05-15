@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-successfull-validation',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./successfull-validation.component.scss'],
 })
 export class SuccessfullValidationComponent implements OnInit {
-
-  constructor() { }
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
+  redirect() {
+    this.router.navigate(['/']);
+  }
 }
