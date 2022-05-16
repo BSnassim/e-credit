@@ -28,11 +28,9 @@
           </ion-item>
           <div class="bios">
             <span id="bio">Authentification avec empreinte</span>
-            <ion-toggle checked="true" color="tertiary"></ion-toggle>
+            <ion-toggle [(ngModel)]="checked" color="tertiary"></ion-toggle>
           </div>
-          <ion-button (click)="checkCredential()">
-            Check Credential
-          </ion-button>
+          <!-- <ion-button (click)="routingpage()"> validation1 page </ion-button> -->
           <ion-button type="submit">Login</ion-button>
         </form>
       </ion-card-content>

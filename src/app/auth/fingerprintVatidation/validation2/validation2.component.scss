@@ -1,0 +1,45 @@
+ion-content{
+  --background: url(../../../../assets/images/back2.png) no-repeat center center / cover;
+}
+.logos {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+ion-img.logo {
+  height: 70px;
+  width: 70px;
+}
+h2{
+  text-align: center;
+  color: #fff;
+  margin-left: 10px;
+  font-size: 22px;
+}
+h4{
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  margin-left: 10px;
+}
+ul{
+  margin-left: 15px;
+  color: lightgreen;
+  font-size: 14px;
+}
+.bios {
+  color: #fff;
+  margin-left: 5px;
+  font-size: 14px;
+}
+#bio {
+  margin-top: 10px;
+  float: left;
+}
+.section {
+  position: fixed;
+  bottom: 0;
+//  transform: translateY(25vh);
+}
+
+

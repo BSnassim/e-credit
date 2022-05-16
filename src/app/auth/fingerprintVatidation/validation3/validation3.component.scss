@@ -1,0 +1,32 @@
+ion-content{
+  --background: url(../../../../assets/images/back2.png) no-repeat center center / cover;
+}
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.logos {
+  display: flex;
+  justify-content: center;
+}
+ion-img.logo {
+  height: 100px;
+  width: 100px;
+}
+h2{
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+}
+h4{
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+}
+.section {
+  position: fixed;
+   bottom: 0;
+ }

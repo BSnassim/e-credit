@@ -19,6 +19,7 @@ import {
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  checked = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.checked);
     if (this.tokenService.getToken()) {
       this.router.navigate(['/']);
     }
@@ -40,81 +42,28 @@ export class LoginComponent implements OnInit {
       { updateOn: 'submit' }
     );
   }
-
-  checkCredential() {
-    NativeBiometric.isAvailable().then((result: AvailableResult) => {
-      const isAvailable = result.isAvailable;
-      alert('RESULT ' + JSON.stringify(result));
-      // const isFaceId=result.biometryType==BiometryType.FACE_ID;
-      // const isFaceId = result.biometryType == BiometryType.FACE_ID;
-
-      if (isAvailable) {
-        // Get user's credentials
-        NativeBiometric.getCredentials({
-          server: 'www.example.com',
-        }).then((credentials) => {
-          alert('CREDENTIAL ' + JSON.stringify(credentials));
-          // Authenticate using biometrics before logging the user in
-          NativeBiometric.verifyIdentity({
-            reason: 'For easy log in',
-            title: 'Log in',
-            subtitle: 'Maybe add subtitle here?',
-            description: 'Maybe a description too?',
-          })
-            .then(() => {
-              //     // Authentication successful
-              alert('SUCCESS!!');
-              //     // this.login(credentials.username, credentials.password);
-            })
-            .catch((err) => {
-              //   // Failed to authenticate
-              alert('FAIL!');
-            });
-        });
-      }
-    });
-  }
-
-  // fingerAuthenticate() {
-  //   this.faio.isAvailable().then(
-  //     () => {
-  //       this.faio.show({}).then(
-  //         (val) => {
-  //           alert(JSON.stringify(val));
-  //         },
-  //         (err) => {
-  //           alert(JSON.stringify(err));
-  //         }
-  //       );
-  //     },
-  //     (err) => {
-  //       alert('fingerprint not available');
-  //     }
-  //   );
-  // }
-
-  // fingerAuthenticate() {
-  //   this.faio
-  //     .show({
-  //       clientId: 'fingerprint-demo',
-  //       clientSecret: 'password',
-  //     })
-  //     .then((result) => {
-  //       this.navCtrl.setRoot('');
-  //     })
-  //     .catch((err) => {
-  //       console.log('Err: ', err);
-  //     });
+  // routingpage() {
+  //   this.router.navigate(['/validation1']);
   // }
 
   login() {
     let loginUser: LoginUser;
     // Binding data to Model
     // eslint-disable-next-line prefer-const
-    loginUser = { ...this.loginForm.value };
-    this.authService.login(loginUser).subscribe((response) => {
-      this.tokenService.setToken(response.token);
-      this.router.navigate(['/']);
-    });
+
+    if (this.checked) {
+      loginUser = { ...this.loginForm.value };
+      this.authService.login(loginUser).subscribe((response) => {
+        this.tokenService.setToken(response.token);
+        this.router.navigate(['/validation1']);
+      });
+    }
+    if (!this.checked) {
+      loginUser = { ...this.loginForm.value };
+      this.authService.login(loginUser).subscribe((response) => {
+        this.tokenService.setToken(response.token);
+        this.router.navigate(['/']);
+      });
+    }
   }
 }
