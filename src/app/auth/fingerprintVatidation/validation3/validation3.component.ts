@@ -12,7 +12,7 @@ export class Validation3Component implements OnInit {
   constructor(private router: Router, public navCtrl: NavController) {}
 
   ngOnInit() {
-    this.setCredential();
+    // this.setCredential();
     this.associate();
   }
 

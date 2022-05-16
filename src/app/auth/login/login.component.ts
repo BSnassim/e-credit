@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
       { updateOn: 'submit' }
     );
   }
-  // routingpage() {
-  //   this.router.navigate(['/validation1']);
-  // }
+  routingpage() {
+    this.router.navigate(['/validation1']);
+  }
 
   login() {
     let loginUser: LoginUser;
