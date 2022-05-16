@@ -46,7 +46,6 @@ import { Validation3Component } from './auth/fingerprintVatidation/validation3/v
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
   ],
   providers: [
     {

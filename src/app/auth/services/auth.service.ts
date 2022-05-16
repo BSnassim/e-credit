@@ -1,3 +1,4 @@
+import { EventsService } from './../../services/events.service';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +15,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private eventService: EventsService
   ) {}
 
   login(u: LoginUser): Observable<any> {
@@ -23,5 +25,6 @@ export class AuthService {
   logout() {
     this.tokenService.removeToken();
     this.router.navigate(['/login']);
+    this.eventService.loggedIn();
   }
 }

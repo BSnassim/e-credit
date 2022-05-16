@@ -1,3 +1,4 @@
+import { EventsService } from './../../services/events.service';
 import { User } from './../../models/user';
 import { TokenService } from './../../auth/services/token.service';
 import { AuthService } from './../../auth/services/auth.service';
@@ -22,11 +23,15 @@ export class AppMenuComponent implements OnInit {
   constructor(
     private menu: MenuController,
     private authService: AuthService,
-    private tokenService: TokenService
-  ) {}
+    private tokenService: TokenService,
+    private events: EventsService
+  ) { }
 
   ngOnInit() {
     this.getUser();
+    this.events.login.subscribe(data => {
+      if (data == true) { this.getUser(); }
+    })
   }
 
   getUser() {
