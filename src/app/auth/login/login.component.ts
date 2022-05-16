@@ -19,7 +19,6 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  checked = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.checked);
     if (this.tokenService.getToken()) {
       this.router.navigate(['/']);
     }
@@ -38,6 +36,7 @@ export class LoginComponent implements OnInit {
       {
         email: ['', Validators.required],
         password: ['', Validators.required],
+        checked: [false],
       },
       { updateOn: 'submit' }
     );
@@ -48,17 +47,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     let loginUser: LoginUser;
-    // Binding data to Model
-    // eslint-disable-next-line prefer-const
-
-    if (this.checked) {
+    if (this.loginForm.value.checked) {
       loginUser = { ...this.loginForm.value };
       this.authService.login(loginUser).subscribe((response) => {
         this.tokenService.setToken(response.token);
         this.router.navigate(['/validation1']);
       });
     }
-    if (!this.checked) {
+    if (!this.loginForm.value.checked) {
       loginUser = { ...this.loginForm.value };
       this.authService.login(loginUser).subscribe((response) => {
         this.tokenService.setToken(response.token);

@@ -16,4 +16,7 @@ export class Validation2Component implements OnInit {
   routingpage3() {
     this.router.navigate(['/validation3']);
   }
+  plusTard2() {
+    this.router.navigate(['/']);
+  }
 }

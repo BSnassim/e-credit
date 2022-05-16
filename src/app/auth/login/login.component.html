@@ -28,7 +28,7 @@
           </ion-item>
           <div class="bios">
             <span id="bio">Authentification avec empreinte</span>
-            <ion-toggle [(ngModel)]="checked" color="tertiary"></ion-toggle>
+            <ion-toggle formControlName="checked" color="tertiary"></ion-toggle>
           </div>
           <!-- <ion-button (click)="routingpage()"> validation1 page </ion-button> -->
           <ion-button type="submit">Login</ion-button>
@@ -37,6 +37,7 @@
     </ion-card>
     <ion-footer collapse="fade">
       <ion-title><small>&#169; GTI - 2022</small></ion-title>
+      {{ loginForm.value | json }}
     </ion-footer>
   </div>
 </ion-content>
