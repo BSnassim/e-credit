@@ -1,0 +1,62 @@
+<ion-content fullscreen="true">
+  <div class="logos">
+    <ion-img class="logo" [src]="'assets/icon/finger.webp'"></ion-img>
+  </div>
+  <h2><b>Connectez-vous d'un simple geste</b></h2>
+  <h4>Activer la connaixion par empreinte digitale</h4>
+
+  <ul>
+    <ion-icon name="checkmark"></ion-icon>
+
+    Cette fonctionnalité ne doit être activée que si vous êtes la seule personne
+    à avoir enregistré vos empreintes digitales sur cet appareil.
+
+    <br /><br />
+    <ion-icon name="checkmark"></ion-icon>
+
+    Assurez-vous d'être la seule personne à pouvoir déverrouiller votre
+    téléphone
+
+    <br /><br />
+
+    <ion-icon name="checkmark"></ion-icon>
+
+    Vos empreintes digitales sont uniquement stockées sur cet appareil et ne
+    sont en aucun cas acessibles ou communiquées E-Credit.
+
+    <br /><br />
+
+    <ion-icon name="checkmark"></ion-icon>
+
+    La fonctionnalité peut à tout moment être désactivée dans les réglages de
+    l'application
+  </ul>
+  <div class="bios">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <span id="bio"
+            >J'ai pris connaissance des conditions et j'active le service</span
+          >
+        </ion-col>
+        <ion-col size="2">
+          <ion-toggle [(ngModel)]="checked" color="tertiary"></ion-toggle>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="section ion-margin-horizontal ion-padding-horizontal">
+    <ion-button
+      expand="block"
+      shape="round"
+      color="success"
+      [disabled]="!checked"
+      (click)="routingpage3()"
+    >
+      ACTIVER
+    </ion-button>
+    <ion-button fill="outline" expand="block" shape="round" color="white">
+      PLUS TARD
+    </ion-button>
+  </div>
+</ion-content>
