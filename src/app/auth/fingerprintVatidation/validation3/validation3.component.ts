@@ -56,4 +56,7 @@ export class Validation3Component implements OnInit {
       }
     });
   }
+  plusTard3() {
+    this.router.navigate(['/']);
+  }
 }
