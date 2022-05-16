@@ -10,7 +10,6 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./list-credit.component.scss'],
 })
 export class ListCreditComponent implements OnInit, OnDestroy {
-
   demandes: {
     id: number;
     nomprenom: string;
@@ -30,7 +29,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
     private demandeCreditService: DemandeCreditService,
     private tokenService: TokenService,
     private loadingController: LoadingController
-  ) { }
+  ) {}
 
   ngOnDestroy(): void {
     this.loading.dismiss();
@@ -50,7 +49,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
       this.demandes = [];
       this.getUser().then((res) => {
         this.getDemandesByUser(res.id);
-      })
+      });
       event.target.complete();
     }, 2000);
   }
@@ -58,7 +57,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
   async presentLoading() {
     this.loading = await this.loadingController.create({
       message: 'Chargement...',
-      id: "1"
+      id: '1',
     });
     await this.loading.present();
   }
@@ -69,12 +68,12 @@ export class ListCreditComponent implements OnInit, OnDestroy {
   }
 
   getDemandesByUser(id: number) {
-    this.demandeCreditService.getDemandesByUser(id).subscribe(data => {
+    this.demandeCreditService.getDemandesByUser(id).subscribe((data) => {
       data.forEach((e) => {
         this.getPhase(e.idPhase).then((res) => {
           this.demandes.push({
             id: e.idDemande,
-            nomprenom: e.nom + " " + e.prenom,
+            nomprenom: e.nom + ' ' + e.prenom,
             dateCreation: new Date(e.datePhase),
             montant: e.montant,
             type: e.idTypeCredit,
@@ -82,7 +81,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
             enAttente: res.enAttenteDe,
             phase: e.idPhase,
             gsm: e.gsm,
-            idSimulation: e.idSimulation
+            idSimulation: e.idSimulation,
           });
         });
       });
@@ -94,8 +93,5 @@ export class ListCreditComponent implements OnInit, OnDestroy {
     return prom;
   }
 
-  details(id:number){
-
-  }
-
+  details(id: number) {}
 }
