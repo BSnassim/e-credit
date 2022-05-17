@@ -9,11 +9,14 @@ import { AvailableResult, NativeBiometric } from 'capacitor-native-biometric';
   styleUrls: ['./validation3.component.scss'],
 })
 export class Validation3Component implements OnInit {
+  isVisible = false;
+
   constructor(private router: Router, public navCtrl: NavController) {}
 
   ngOnInit() {
     // this.setCredential();
     this.associate();
+    console.log(this.isVisible);
   }
 
   setCredential() {
@@ -49,8 +52,8 @@ export class Validation3Component implements OnInit {
               //     // this.login(credentials.username, credentials.password);
             })
             .catch((err) => {
-              //   // Failed to authenticate
-              alert('FAIL!');
+              // Failed to authenticate
+              this.isVisible = true;
             });
         });
       }
