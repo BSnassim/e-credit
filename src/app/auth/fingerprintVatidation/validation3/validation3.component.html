@@ -3,18 +3,37 @@
     <div class="logos">
       <ion-img class="logo" [src]="'assets/icon/finger.webp'"></ion-img>
     </div>
-    <h2><b>Association</b></h2>
+    <h2 *ngIf="!isVisible"><b>Association</b></h2>
+    <h3 *ngIf="isVisible"><b>Empreinte non reconnue. Veuillez réessayer</b></h3>
+    <ion-button
+      style="width: 100%"
+      shape="round"
+      color="warning"
+      *ngIf="isVisible"
+      (click)="associate()"
+    >
+      Réessayer
+    </ion-button>
     <h4>Toucher le capteur pour associer votre empreinte à l'application</h4>
   </div>
-  <div class="section ion-margin-horizontal ion-padding-horizontal">
-    <ion-button
-      fill="outline"
-      expand="block"
-      shape="round"
-      color="white"
-      (click)="plusTard3()"
-    >
-      PLUS TARD
-    </ion-button>
-  </div>
 </ion-content>
+<ion-footer>
+  <ion-button
+    fill="outline"
+    expand="block"
+    shape="round"
+    color="white"
+    (click)="setCredential()"
+  >
+    Set Credential
+  </ion-button>
+  <ion-button
+    fill="outline"
+    expand="block"
+    shape="round"
+    color="white"
+    (click)="plusTard3()"
+  >
+    PLUS TARD
+  </ion-button>
+</ion-footer>
