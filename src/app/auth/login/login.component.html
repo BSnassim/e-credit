@@ -1,6 +1,5 @@
 <ion-header [translucent]="true"> </ion-header>
 <ion-content [fullscreen]="true">
-
   <div id="container">
     <div class="logos">
       <ion-img class="logo" [src]="'assets/images/logo.png'"></ion-img>
@@ -25,14 +24,14 @@
             <span id="bio">Login avec empreinte</span>
             <ion-toggle formControlName="checked" color="tertiary"></ion-toggle>
           </div>
-          <!-- <ion-button (click)="routingpage()"> validation1 page </ion-button> -->
+          <ion-button (click)="routingpage()"> validation1 page </ion-button>
           <ion-button type="submit">Login</ion-button>
         </form>
       </ion-card-content>
     </ion-card>
     <ion-footer collapse="fade">
       <ion-title><small>&#169; GTI - 2022</small></ion-title>
-      {{ loginForm.value | json }}
+      <!-- {{ loginForm.value | json }} -->
     </ion-footer>
   </div>
 </ion-content>
