@@ -17,7 +17,7 @@ export class AppMenuComponent implements OnInit {
     { title: 'Accueil', url: '/accueil', icon: 'home' },
     { title: 'Notifications', url: '/notfound', icon: 'notifications' },
     { title: 'Mes credits', url: '/credit/mescredits', icon: 'bar-chart' },
-    { title: 'Demander un credit', url: '/credit/simulation', icon: 'create' },
+    { title: 'Demander un credit', url: '/credit/demande', icon: 'create' },
   ];
 
   constructor(

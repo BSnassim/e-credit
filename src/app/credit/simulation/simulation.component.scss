@@ -11,22 +11,75 @@ ion-item {
     color: white;
     --background: transparent;
 }
-ion-button{
+ion-button {
     --background: #1da1f2;
 }
-.bubble{
+.bubble {
     border: 1px solid #1da1f2;
     border-radius: 3ch;
     margin-top: 10px;
     margin-left: 5%;
     width: 90%;
 }
-.bubble ion-label{
-    color:#1da1f2 !important;
+.bubble ion-label {
+    color: #1da1f2 !important;
     font-weight: 600;
 }
-.error-message{
+.error-message {
     color: rgb(247, 67, 67);
     margin-left: 5px;
     font-size: 14px;
+}
+.eligibility {
+    height: 100%;
+    width: 100%;
+    border-radius: 3ch;
+}
+#dismiss{
+    position: absolute;
+    right:0;
+    --background: #cacaca00;
+    --box-shadow:none;
+}
+ion-icon{
+    color:white;
+    font-size: 90px;
+    position: absolute;
+    top:25%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.green-part{
+    border-top-left-radius: 3ch;
+    border-top-right-radius: 3ch;
+    background: rgb(17, 189, 89);
+    height: 50%;
+}
+.red-part{
+    border-top-left-radius: 3ch;
+    border-top-right-radius: 3ch;
+    background: rgb(204, 62, 27);
+    height: 50%;
+}
+.white-part{
+    text-align: center;
+    font-weight: 600;
+    border-bottom-left-radius: 3ch;
+    border-bottom-right-radius: 3ch;
+    background: white;
+    height: 50%;
+    border:1px solid white;
+}
+p{
+    margin-top: 10%;
+}
+#pad{
+    margin-top: 10%;
+    --background: rgb(17, 189, 89) !important;
+    width: 90%;
+}
+#padred{
+    margin-top: 10%;
+    --background: rgb(204, 62, 27) !important;
+    width: 90%;
 }

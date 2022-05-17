@@ -7,7 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Simulation } from 'src/app/models/credit/simulation';
 import { TypeCredit } from 'src/app/models/credit/type-credit';
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
-import { IonDatetime } from '@ionic/angular';
+import { IonDatetime, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-simulation',
@@ -89,6 +89,8 @@ export class SimulationComponent implements OnInit {
     ],  
   }
 
+  resultat: number;
+
   date;
 
   simForm: FormGroup;
@@ -125,6 +127,7 @@ export class SimulationComponent implements OnInit {
     private demandeService: DemandeCreditService,
     private router: Router,
     private route: ActivatedRoute,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -229,8 +232,25 @@ export class SimulationComponent implements OnInit {
     } else return 8;
   }
 
-  submit() {
+  dismissModal(){
+    this.modalController.dismiss();
+  }
 
+  toDemande(){
+    this.router.navigate(["/credit/demande", { id1: this.simulation.idSim }]);
+}
+
+  submit() {
+    this.simForm.value.dateNaissance = this.simulation.dateNaissance;
+    this.simForm.value.dateCompte = this.simulation.dateCompte;
+    this.simulation = { ...this.simForm.value }
+    this.simulation.idUser = this.UserId;
+    this.simulation.idTypeCredit = this.simForm.value.typeCredit;
+    this.resultat = this.simulationService.calculateSimulation(this.simulation);
+    this.simulation.resultat = (this.resultat>=50? "Eligible":"Ineligible");
+    this.simulationService.saveSimulation(this.simulation).subscribe( data =>{
+      this.simulation.idSim = data;
+  });
   }
 
 }
