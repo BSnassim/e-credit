@@ -8,6 +8,7 @@ import { Simulation } from 'src/app/models/credit/simulation';
 import { TypeCredit } from 'src/app/models/credit/type-credit';
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
 import { IonDatetime, ModalController } from '@ionic/angular';
+import { dismiss } from '@ionic/core/dist/types/utils/overlays';
 
 @Component({
   selector: 'app-simulation',
@@ -96,25 +97,18 @@ export class SimulationComponent implements OnInit {
   simForm: FormGroup;
 
   echeanceOptions = ['Mois', 'An'];
-  selectedEcheance: string;
 
   familialeOptions = ["Marié(e)", "Célibataire", "Divorcé(e)", "Veuf(ve)"];
-  selectedFamiliale: string;
 
   emploiOptions = ['Salarié', "Fonction libérale", "Retraité", "Rentier"];
-  selectedEmploi: string;
 
   medicaleOptions = ['Bon santé', "Maladie chronique"];
-  selectedMedicale: string;
 
   logementOptions = ['Locataire', "Propriétaire"];
-  selectedLogement: string;
 
   pieceOptions = ["CIN", "Passeport"];
-  selectedPiece: string;
 
   typesCredit: TypeCredit[];
-  selectedCredit: TypeCredit;
 
   simulation = {} as Simulation;
 
@@ -238,6 +232,7 @@ export class SimulationComponent implements OnInit {
 
   toDemande(){
     this.router.navigate(["/credit/demande", { id1: this.simulation.idSim }]);
+    this.dismissModal();
 }
 
   submit() {

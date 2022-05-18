@@ -26,15 +26,15 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 ion-toolbar {
-    --background: #4c627a;
-    color: aliceblue;
-    border-bottom: 1px solid #455363;
+    --background: rgba(17, 42, 105, 1);
+    color: white;
+    border-bottom: 1px solid #61089c;
 }
 ion-content {
-    --background: #243447;
+    --background: white;
 }
 #container {
-    color: aliceblue;
+    color: black;
 }
 .modal-test{
     padding-top: 40%;

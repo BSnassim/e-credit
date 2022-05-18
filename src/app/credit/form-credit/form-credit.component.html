@@ -143,7 +143,7 @@
 
       <ion-item class="bubble">
         <ion-label>Type de credit</ion-label>
-        <ion-select placeholder="Choisir" formControlName="typeCredit">
+        <ion-select placeholder="Choisir" formControlName="typeCredit" (ionChange)="findDocObligatoire()">
           <ion-select-option *ngFor="let v of typesCredit" [value]='v.idType'>{{v.libcredit}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -192,11 +192,32 @@
 
       <ion-item lines="none">
         <fieldset>
+          <legend>Garanties</legend>
+          <table id="garanties">
+            <tr><th>Nature</th><th>Type</th><th>Montant</th><th><ion-icon id="addIcon" name="add-circle-outline"></ion-icon></th></tr>
+            <tr>
+              <td>nature</td><td>type</td><td>montant</td><td><ion-icon name="pencil"></ion-icon><ion-icon name="trash"></ion-icon></td>
+            </tr>
+          </table>
+        </fieldset>
+      </ion-item>
+
+      <ion-item lines="none">
+        <fieldset>
           <legend>Pieces Jointes</legend>
+          <table>
+            <th>Documents nécessaires</th>
+            <tr *ngFor="let t of requiredDocs">
+              <td>{{t.libDoc}}</td>
+            </tr>
+          </table>
           <label for="file-upload" class="file-upload">Choisir</label>
           <input id="file-upload" formControlName="piecesJointes" type="file" (change)="onChange($event)"
-            multiple="true" accept="image/*, .pdf" /> {{files.length}} fichiers sélectionnés<br><br>
-            <p *ngFor="let f of selected"><a id="link" (click)="onDownload(f)">{{f.fileName}}</a><a id="redx" (click)="onDelete(f)">X</a></p>
+            multiple="true" accept="image/*, .pdf" />
+          {{files.length}} fichiers sélectionnés<br><br>
+          <p *ngFor="let f of selected">
+            <a id="link" (click)="onDownload(f)">{{f.fileName}}</a><a id="redx" (click)="onDelete(f)">X</a>
+          </p>
           <ion-button (click)="onUpload()" [hidden]="!demForm.value.piecesJointes">Upload</ion-button>
         </fieldset>
       </ion-item>
@@ -210,7 +231,7 @@
       <ion-grid>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-button id="modal-button" type="submit" shape="round" [disabled]="!demForm.valid">Envoyer</ion-button>
+            <ion-button type="submit" shape="round" [disabled]="!demForm.valid">Envoyer</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

@@ -80,21 +80,17 @@ export class FormCreditComponent implements OnInit {
       {type: 'required', message: 'Ce champ est obligatoire.'},
     ],
     'piecesJointes': [
-      {type: 'required', message: 'Ce champ est obligatoire.'},
+      {type: 'required', message: 'Veuillez insérer les documents nécessaires.'},
     ]
   }
 
   echeanceOptions = ['Mois', 'An'];
-  selectedEcheance: string;
 
   familialeOptions = ["Marié(e)", "Célibataire", "Divorcé(e)", "Veuf(ve)"];
-  selectedFamiliale: string;
 
   pieceOptions = ["CIN", "Passeport"];
-  selectedPiece: string;
 
   typesCredit: TypeCredit[];
-  selectedCredit: TypeCredit;
 
   demande = {} as Demande;
 
@@ -113,6 +109,8 @@ export class FormCreditComponent implements OnInit {
   propagateValidator: any;
 
   files=[] as File[];
+
+  requiredDocs = [] as {idDoc:number,libDoc:string}[];
 
   constructor(
     private router: Router,
@@ -219,6 +217,15 @@ export class FormCreditComponent implements OnInit {
       this.typesCredit = response;
     });
   }
+
+  findDocObligatoire() {
+    console.log("test")
+    this.demandeService
+        .getPieceJointesAPI(this.demForm.value.typeCredit)
+        .subscribe((response) => {
+            this.requiredDocs = response;
+        });
+}
 
   maxNumPiece() {
     if (this.demForm.value.typePiece == "CIN") {
