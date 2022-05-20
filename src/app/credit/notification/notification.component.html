@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+
+  <div>
+    <div *ngFor="let event of events">
+      <ion-item>
+        <ion-label>
+          <span
+            >Rendez vous avec le chargé de la banque pour la demande N°
+            {{ event.idDemande }}</span
+          ><br />
+          <span class="date">
+            le: {{ event.dateRdv | date: "dd/MM/yyyy-HH:mm" }} </span
+          ><br />
+        </ion-label>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
