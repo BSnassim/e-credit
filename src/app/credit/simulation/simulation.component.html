@@ -240,22 +240,44 @@
           &#9432; {{ validation.message }}
         </div>
       </ng-container>
-
+      
       <ion-grid>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-button type="submit" shape="round">Simuler</ion-button>
+            <ion-button id="modal-button" type="submit" shape="round" [disabled]="!simForm.valid">Simuler</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </form>
 
-    <!-- testing stuff -->
-    <ng-template>
-      <div>
-        image
-      </div>
-    </ng-template>
+    <!-- result modal -->
+      <ion-modal [swipeToClose]="true" trigger="modal-button" class="modal-test">
+        <ng-template>
+          <ion-content>
+            <div class="eligibility" *ngIf="resultat>=50">
+              <div class="green-part">
+              <ion-button id="dismiss" (click)="dismissModal()">X</ion-button>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              </div>
+              <div class="white-part">
+                <p>Vous êtes eligible !</p>
+                <ion-button id="pad" shape="round" (click)="toDemande()">Passer au demande</ion-button>
+              </div>
+            </div>
+            <div class="eligibility" *ngIf="resultat<50">
+              <div class="red-part">
+                <ion-button id="dismiss" (click)="dismissModal()">X</ion-button>
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </div>
+              <div class="white-part">
+                <p>Vous n'êtes pas eligible !</p>
+                <ion-button id="padred" shape="round" (click)="dismissModal()">Fermer</ion-button>
+              </div>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
 
   </div>
 </ion-content>

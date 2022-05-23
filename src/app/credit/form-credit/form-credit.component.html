@@ -9,6 +9,234 @@
 <ion-content [fullscreen]="true">
 
   <div id="container">
-    
+    <form (submit)="submit()" [formGroup]="this.demForm" name="demForm">
+
+      <ion-item lines="none">
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input formControlName="nom"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.nom">
+        <div class="error-message"
+          *ngIf="demForm.get('nom').hasError(validation.type) && (demForm.get('nom').dirty || demForm.get('nom').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input formControlName="prenom"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.prenom">
+        <div class="error-message"
+          *ngIf="demForm.get('prenom').hasError(validation.type) && (demForm.get('prenom').dirty || demForm.get('prenom').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item class="bubble">
+        <ion-label>Type piéce identité</ion-label>
+        <ion-select placeholder="Choisir" formControlName="typePiece">
+          <ion-select-option *ngFor="let v of pieceOptions" [value]='v'>{{v}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.typePiece">
+        <div class="error-message"
+          *ngIf="demForm.get('typePiece').hasError(validation.type) && (demForm.get('typePiece').dirty || demForm.get('typePiece').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Numero piéce identité</ion-label>
+        <ion-input inputmode="numeric" formControlName="numPiece" [maxlength]="maxNumPiece()"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.numPiece">
+        <div class="error-message"
+          *ngIf="demForm.get('numPiece').hasError(validation.type) && (demForm.get('numPiece').dirty || demForm.get('numPiece').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Numero de compte</ion-label>
+        <ion-input inputmode="numeric" maxlength="13" formControlName="numCompte">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.numCompte">
+        <div class="error-message"
+          *ngIf="demForm.get('numCompte').hasError(validation.type) && (demForm.get('numCompte').dirty || demForm.get('numCompte').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">GSM</ion-label>
+        <ion-input inputmode="tel" maxlength="8" formControlName="gsm"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.gsm">
+        <div class="error-message"
+          *ngIf="demForm.get('gsm').hasError(validation.type) && (demForm.get('gsm').dirty || demForm.get('gsm').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item button="true" id="dateCompte" class="bubble">
+        <ion-label>Date ouverture de compte</ion-label>
+        <ion-text slot="end">{{ demande.dateCompte | date:"dd/MM/yyyy" }}</ion-text>
+        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateCompte">
+          <ng-template>
+            <ion-datetime #modalDatetime1 presentation="date" formControlName="dateCompte"
+              (ionChange)="demande.dateCompte = formatDate(modalDatetime1.value)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.dateCompte">
+        <div class="error-message"
+          *ngIf="demForm.get('dateCompte').hasError(validation.type) && (demForm.get('dateCompte').dirty || demForm.get('dateCompte').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item button="true" id="dateNais" class="bubble">
+        <ion-label>Date de naissance</ion-label>
+        <ion-text slot="end">{{ demande.dateNaissance | date:"dd/MM/yyyy" }}</ion-text>
+        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateNais">
+          <ng-template>
+            <ion-datetime #modalDatetime presentation="date" formControlName="dateNaissance"
+              (ionChange)="demande.dateNaissance = formatDate(modalDatetime.value)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.dateNaissance">
+        <div class="error-message"
+          *ngIf="demForm.get('dateNaissance').hasError(validation.type) && (demForm.get('dateNaissance').dirty || demForm.get('dateNaissance').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item class="bubble">
+        <ion-label>Situation familiale</ion-label>
+        <ion-select placeholder="Choisir" formControlName="sitFamiliale">
+          <ion-select-option *ngFor="let v of familialeOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.sitFamiliale">
+        <div class="error-message"
+          *ngIf="demForm.get('sitFamiliale').hasError(validation.type) && (demForm.get('sitFamiliale').dirty || demForm.get('sitFamiliale').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Salaire mensuel en DT</ion-label>
+        <ion-input inputmode="decimal" type="number" formControlName="salaire"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.salaire">
+        <div class="error-message"
+          *ngIf="demForm.get('salaire').hasError(validation.type) && (demForm.get('salaire').dirty || demForm.get('salaire').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item class="bubble">
+        <ion-label>Type de credit</ion-label>
+        <ion-select placeholder="Choisir" formControlName="typeCredit" (ionChange)="findDocObligatoire()">
+          <ion-select-option *ngFor="let v of typesCredit" [value]='v.idType'>{{v.libcredit}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.typeCredit">
+        <div class="error-message"
+          *ngIf="demForm.get('typeCredit').hasError(validation.type) && (demForm.get('typeCredit').dirty || demForm.get('typeCredit').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Montant en DT</ion-label>
+        <ion-input inputmode="decimal" type="number" formControlName="montant"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.montant">
+        <div class="error-message"
+          *ngIf="demForm.get('montant').hasError(validation.type) && (demForm.get('montant').dirty || demForm.get('montant').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Nombre d'écheances</ion-label>
+        <ion-input type="number" inputmode="numeric" maxlength="3" formControlName="nbreEcheance">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.nbreEcheance">
+        <div class="error-message"
+          *ngIf="demForm.get('nbreEcheance').hasError(validation.type) && (demForm.get('nbreEcheance').dirty || demForm.get('nbreEcheance').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item class="bubble">
+        <ion-label>Par</ion-label>
+        <ion-select placeholder="Choisir" formControlName="unite">
+          <ion-select-option *ngFor="let v of echeanceOptions" [value]='v'>{{v}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.unite">
+        <div class="error-message"
+          *ngIf="demForm.get('unite').hasError(validation.type) && (demForm.get('unite').dirty || demForm.get('unite').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-item lines="none">
+        <fieldset>
+          <legend>Garanties</legend>
+          <table id="garanties">
+            <tr><th>Nature</th><th>Type</th><th>Montant</th><th><ion-icon id="addIcon" name="add-circle-outline"></ion-icon></th></tr>
+            <tr>
+              <td>nature</td><td>type</td><td>montant</td><td><ion-icon name="pencil"></ion-icon><ion-icon name="trash"></ion-icon></td>
+            </tr>
+          </table>
+        </fieldset>
+      </ion-item>
+
+      <ion-item lines="none">
+        <fieldset>
+          <legend>Pieces Jointes</legend>
+          <table>
+            <th>Documents nécessaires</th>
+            <tr *ngFor="let t of requiredDocs">
+              <td>{{t.libDoc}}</td>
+            </tr>
+          </table>
+          <label for="file-upload" class="file-upload">Choisir</label>
+          <input id="file-upload" formControlName="piecesJointes" type="file" (change)="onChange($event)"
+            multiple="true" accept="image/*, .pdf" />
+          {{files.length}} fichiers sélectionnés<br><br>
+          <p *ngFor="let f of selected">
+            <a id="link" (click)="onDownload(f)">{{f.fileName}}</a><a id="redx" (click)="onDelete(f)">X</a>
+          </p>
+          <ion-button (click)="onUpload()" [hidden]="!demForm.value.piecesJointes">Upload</ion-button>
+        </fieldset>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.piecesJointes">
+        <div class="error-message"
+          *ngIf="demForm.get('piecesJointes').hasError(validation.type) && (demForm.get('piecesJointes').dirty || demForm.get('piecesJointes').touched)">
+          &#9432; {{ validation.message }}
+        </div>
+      </ng-container>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button type="submit" shape="round" [disabled]="!demForm.valid">Envoyer</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </form>
+
   </div>
 </ion-content>

@@ -1,16 +1,15 @@
 ion-toolbar {
-    --background: rgba(36, 51, 78, 0.89);
-    border-bottom: 1px solid #2b3b4ee1;
+    --background: rgba(17, 42, 105, 1);
     color: white;
     height: 100px;
-    
 }
 ion-content {
-    --background: rgb(36, 51, 78);
+    --background: rgb(17,42,105);
+--background: linear-gradient(23deg, rgba(17,42,105,1) 0%, rgba(88,104,145,1) 8%, rgba(124,137,170,1) 12%, rgba(218,219,219,1) 36%, rgba(244,244,244,1) 53%);
 }
 ion-item {
-    --background: rgb(36, 51, 78);
-    color: white;
+    --background: #f4f4f4;
+    color: #1e6091;
 }
 ion-list {
     padding: 0px;
@@ -23,26 +22,25 @@ img {
     left: 7px;
 }
 ion-icon {
-    color: white;
+    color: #1e6091;
 }
 ion-title {
     float: right;
     width: 75%;
-    height:fit-content;
+    height: fit-content;
     font-size: medium;
     margin-top: 30px;
     margin-right: 0px;
-    
 }
 ion-avatar {
     height: 80px;
     width: 25%;
     padding: -5px;
-    float:left;
+    float: left;
 }
 #logout {
     border-top: 1px solid #2b3b4ee1;
 }
 .selected {
-    --background: #1da1f2;
+    --background: #e0e3e6;
 }

@@ -104,7 +104,7 @@ export class DemandeCreditService {
   //piece jointes
 
   getPieceJointesAPI(i: any) {
-    return this.http.get<PieceJointes[]>(`${this.baseUrl}` + `/documents/` + i);
+    return this.http.get<any[]>(`${this.baseUrl}` + `/documents/` + i);
   }
 
   getPieceJointesByDemande(id: number) {
