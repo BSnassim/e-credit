@@ -26,5 +26,6 @@ export class AuthService {
     this.tokenService.removeToken();
     this.router.navigate(['/login']);
     this.eventService.loggedIn();
+    window.location.reload();
   }
 }

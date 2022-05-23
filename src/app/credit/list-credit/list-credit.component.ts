@@ -1,4 +1,3 @@
-import { Demande } from './../../models/credit/demande';
 import { TokenService } from './../../auth/services/token.service';
 import { DemandeCreditService } from './../../services/demande-credit.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';

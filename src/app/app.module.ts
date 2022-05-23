@@ -19,6 +19,7 @@ import { SuccessfullValidationComponent } from './auth/fingerprintVatidation/suc
 import { Validation1Component } from './auth/fingerprintVatidation/validation1/validation1.component';
 import { Validation2Component } from './auth/fingerprintVatidation/validation2/validation2.component';
 import { Validation3Component } from './auth/fingerprintVatidation/validation3/validation3.component';
+import { NotificationComponent } from './credit/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { Validation3Component } from './auth/fingerprintVatidation/validation3/v
     ListCreditComponent,
     FormCreditComponent,
     SimulationComponent,
+    NotificationComponent,
   ],
   entryComponents: [],
   imports: [
