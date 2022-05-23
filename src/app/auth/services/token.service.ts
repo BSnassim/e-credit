@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user';
 })
 export class TokenService {
   baseUrl = environment.apiURL + '/authenticate';
+  url = environment.apiURL;
 
   constructor(private http: HttpClient, private router: Router) {}
   getToken() {
@@ -25,7 +26,7 @@ export class TokenService {
   // Used to get the user details using his token
   getUser(): Observable<User> {
     return this.http.get<User>(
-      this.baseUrl + '/getUserByToken/' + this.getToken()
+      this.url + '/getUserByToken/' + this.getToken()
     );
   }
 
