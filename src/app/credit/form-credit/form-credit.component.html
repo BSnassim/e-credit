@@ -9,6 +9,11 @@
 <ion-content [fullscreen]="true">
 
   <div id="container">
+    <div class="modifyDem" *ngIf="demande.idPhase === 4">
+      <ion-button color="secondary" (click)="modifyDemande()">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button> Modifier votre demande
+    </div>
     <form (submit)="submit()" [formGroup]="this.demForm" name="demForm">
 
       <ion-item lines="none">
@@ -130,26 +135,15 @@
         </div>
       </ng-container>
 
-      <ion-item lines="none">
-        <ion-label position="floating">Salaire mensuel en DT</ion-label>
-        <ion-input inputmode="decimal" type="number" formControlName="salaire"></ion-input>
-      </ion-item>
-      <ng-container *ngFor="let validation of validation_messages.salaire">
-        <div class="error-message"
-          *ngIf="demForm.get('salaire').hasError(validation.type) && (demForm.get('salaire').dirty || demForm.get('salaire').touched)">
-          &#9432; {{ validation.message }}
-        </div>
-      </ng-container>
-
       <ion-item class="bubble">
         <ion-label>Type de credit</ion-label>
-        <ion-select placeholder="Choisir" formControlName="typeCredit" (ionChange)="findDocObligatoire()">
+        <ion-select placeholder="Choisir" formControlName="idTypeCredit" (ionChange)="findDocObligatoire()">
           <ion-select-option *ngFor="let v of typesCredit" [value]='v.idType'>{{v.libcredit}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ng-container *ngFor="let validation of validation_messages.typeCredit">
+      <ng-container *ngFor="let validation of validation_messages.idTypeCredit">
         <div class="error-message"
-          *ngIf="demForm.get('typeCredit').hasError(validation.type) && (demForm.get('typeCredit').dirty || demForm.get('typeCredit').touched)">
+          *ngIf="demForm.get('idTypeCredit').hasError(validation.type) && (demForm.get('idTypeCredit').dirty || demForm.get('idTypeCredit').touched)">
           &#9432; {{ validation.message }}
         </div>
       </ng-container>
@@ -190,13 +184,79 @@
         </div>
       </ng-container>
 
+      <!-- garantie modal -->
+      <ion-modal [swipeToClose]="true" [isOpen]="garantieModal" class="modal-test">
+        <ng-template>
+          <ion-content>
+            <div class="modal-garantie">
+              <ion-button id="dismiss" (click)="dismissModal()">X</ion-button>
+              <form (submit)="addGarantie()" [formGroup]="garantieForm">
+                <ion-item class="bubble garantie-field">
+                  <ion-label>Type</ion-label>
+                  <ion-select placeholder="Choisir" formControlName="type">
+                    <ion-select-option *ngFor="let t of typeGarantie" [value]='t' class="select-garantie">
+                      {{t.libType}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item class="bubble garantie-field">
+                  <ion-label>Nature</ion-label>
+                  <ion-select placeholder="Choisir" formControlName="nature">
+                    <ion-select-option *ngFor="let n of natureGarantie" [value]='n' class="select-garantie">
+                      {{n.libelleNature}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item lines="none" style="margin-top:20px;">
+                  <ion-label position="floating">Montant en DT</ion-label>
+                  <ion-input inputmode="decimal" type="number" formControlName="montant"></ion-input>
+                </ion-item>
+
+                <ion-grid>
+                  <ion-row>
+                    <ion-col class="ion-text-center">
+                      <ion-button type="submit" shape="round" [disabled]="!garantieForm.valid" id="garantie-submit">
+                        <span *ngIf="!EditingGarantie">Ajouter</span>
+                        <span *ngIf="EditingGarantie">Modifier</span>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </form>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
       <ion-item lines="none">
         <fieldset>
           <legend>Garanties</legend>
           <table id="garanties">
-            <tr><th>Nature</th><th>Type</th><th>Montant</th><th><ion-icon id="addIcon" name="add-circle-outline"></ion-icon></th></tr>
             <tr>
-              <td>nature</td><td>type</td><td>montant</td><td><ion-icon name="pencil"></ion-icon><ion-icon name="trash"></ion-icon></td>
+              <th>Nature</th>
+              <th>Type</th>
+              <th>Montant</th>
+              <th class="actionButtons" *ngIf="!viewingDemande || editingDemande">
+                <a (click)="openModal()">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </a>
+              </th>
+            </tr>
+            <tr *ngFor="let g of garanties; index as i" class="gRows">
+              <td>{{g.nature.libelleNature}}</td>
+              <td>{{g.type.libType}}</td>
+              <td>{{g.montant}} TND</td>
+              <td *ngIf="!viewingDemande || editingDemande">
+                <a (click)="editGarantie(i)">
+                  <ion-icon name="create"></ion-icon>
+                </a>
+                <a (click)="deleteGarantie(i)">
+                  <ion-icon style="color:rgb(192, 13, 13)" name="trash"></ion-icon>
+                </a>
+              </td>
             </tr>
           </table>
         </fieldset>
@@ -211,14 +271,15 @@
               <td>{{t.libDoc}}</td>
             </tr>
           </table>
-          <label for="file-upload" class="file-upload">Choisir</label>
+          <label for="file-upload" class="file-upload" *ngIf="!viewingDemande || editingDemande">Choisir</label>
           <input id="file-upload" formControlName="piecesJointes" type="file" (change)="onChange($event)"
             multiple="true" accept="image/*, .pdf" />
-          {{files.length}} fichiers sélectionnés<br><br>
+          <span *ngIf="!viewingDemande || editingDemande"> {{files.length}} fichiers sélectionnés</span><br><br>
           <p *ngFor="let f of selected">
-            <a id="link" (click)="onDownload(f)">{{f.fileName}}</a><a id="redx" (click)="onDelete(f)">X</a>
+            <a id="link" (click)="onDownload(f)">{{f.fileName}}</a><a id="redx" (click)="onDelete(f)"
+              *ngIf="!viewingDemande || editingDemande">X</a>
           </p>
-          <ion-button (click)="onUpload()" [hidden]="!demForm.value.piecesJointes">Upload</ion-button>
+          <ion-button (click)="onUpload()" [hidden]="!demForm.value.piecesJointes" id="upload">Upload</ion-button>
         </fieldset>
       </ion-item>
       <ng-container *ngFor="let validation of validation_messages.piecesJointes">
@@ -227,11 +288,12 @@
           &#9432; {{ validation.message }}
         </div>
       </ng-container>
-
+      <p class="errors">{{errors}}</p>
       <ion-grid>
         <ion-row>
           <ion-col class="ion-text-center">
-            <ion-button type="submit" shape="round" [disabled]="!demForm.valid">Envoyer</ion-button>
+            <ion-button *ngIf="!viewingDemande || editingDemande" type="submit" shape="round"
+              [disabled]="validateDemForm()">Envoyer</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

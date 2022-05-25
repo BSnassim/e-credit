@@ -40,7 +40,7 @@ export class DemandeCreditService {
     return this.http.get<Demande[]>(this.baseUrl + '/demande/ByAgence/' + id);
   }
 
-  getDemandeExistsAPI(i: any) {
+  getDemandeExistsAPI(i: string) {
     return this.http.get<boolean>(`${this.baseUrl}` + `/demande/Exists/` + i);
   }
 
@@ -109,7 +109,7 @@ export class DemandeCreditService {
 
   getPieceJointesByDemande(id: number) {
     return this.http.get<PieceJointes[]>(
-      this.baseUrl + '/pieceJointes/demande/' + id
+      this.baseUrl + '/piecesJointes/demande/' + id
     );
   }
 

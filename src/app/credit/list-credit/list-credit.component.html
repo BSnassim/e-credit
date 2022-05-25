@@ -17,11 +17,9 @@
       <ion-item lines="none" button (click)="details(d.id)">
         <ion-label>
           <span class="id">Demande n°: {{ d.id }}</span>
-          <ion-button *ngIf="d.phase === 4" color="secondary">
-            <ion-icon name="create-outline"></ion-icon> </ion-button
-          ><br />
+          <br />
           <span class="date">
-            Crée le: {{ d.dateCreation | date: "dd/MM/yyyy" }} </span
+            Créé le: {{ d.dateCreation | date: "dd/MM/yyyy" }} </span
           ><br />
           <span class="etat" *ngIf="d.enAttente">{{ d.enAttente }}</span>
         </ion-label>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TokenService } from './../../auth/services/token.service';
 import { DemandeCreditService } from './../../services/demande-credit.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -27,7 +28,8 @@ export class ListCreditComponent implements OnInit, OnDestroy {
   constructor(
     private demandeCreditService: DemandeCreditService,
     private tokenService: TokenService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private router: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -92,5 +94,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
     return prom;
   }
 
-  details(id: number) {}
+  details(id: number) {
+    this.router.navigate(['/credit/demande', { id: id }]);
+  }
 }
