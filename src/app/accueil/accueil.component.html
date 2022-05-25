@@ -7,9 +7,19 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-
   <div id="container">
-    <strong class="capitalize">strong title</strong>
-    <p>accueil works!</p>
+    <h2>Timeline</h2>
+
+    <h5 style="margin-top: 5em">Horizontal - Alternate Align</h5>
+    <!-- <p-timeline
+      [value]="horizontalEvents"
+      layout="horizontal"
+      align="alternate"
+    > -->
+    <ng-template pTemplate="content" let-event>
+      {{ event }}
+    </ng-template>
+    <ng-template pTemplate="opposite" let-event> &nbsp; </ng-template>
+    <!-- </p-timeline> -->
   </div>
 </ion-content>
