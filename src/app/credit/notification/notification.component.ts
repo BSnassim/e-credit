@@ -3,7 +3,7 @@ import { DemandeRdv } from 'src/app/models/demande-rdv';
 // import { TokenService } from 'src/app/auth/services/token.service';
 // import { AppMainComponent } from 'src/app/main/app-main/app-main.component';
 
-import { EventsService } from 'src/app/Services/events.service';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-notification',

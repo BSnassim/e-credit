@@ -1,4 +1,4 @@
 export class TypeGarantie {
-    idType?: number;
+    id?: number;
     libType?: string;
 }

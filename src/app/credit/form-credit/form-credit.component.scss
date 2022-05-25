@@ -51,18 +51,21 @@ input[type="file"] {
     background: #1e6091;
     border-radius: 3ch;
     padding: 10px;
-    color: black;
+    color: white;
     font-weight: 500;
     background-position: center;
     transition: background 0.8s;
 }
 .file-upload:hover {
-    background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/15000%;
+    background: #80d3e7 radial-gradient(circle, transparent 1%, #ffffff 1%) center/15000%;
 }
 .file-upload:active {
-    background-color: #cccccc;
+    background-color: #80d3e7;
     background-size: 100%;
     transition: background 0s;
+}
+#upload{
+    color:white;
 }
 fieldset {
     color: #1e6091;
@@ -85,6 +88,7 @@ fieldset {
 table{
     color:#1e6091;
     margin-bottom: 20px;
+    width: 100%;
 }
 th{
     padding-bottom: 10px;
@@ -92,16 +96,40 @@ th{
 }
 td{
     font-weight: 500;
-    padding-bottom: 10px;
 }
 #garanties ,th ,td{
-    border:2px solid red;
+    border-bottom:1px solid rgb(88, 181, 218);
+    text-align: center;
 }
 ion-icon{
-    display: flex;
-    justify-content: center;
-    font-size:26px;
+    font-size:28px;
 }
-#addIcon{
-    align-items: center;
+.modal-garantie{
+    height: 100%;
+    width: 100%;
+    background:white;
+    border-radius: 3ch;
+    display: flow-root;
+}
+.garantie-field{
+    margin-top: 40px;
+}
+#garantie-submit{
+    color:white;
+    margin-top: 30px;
+}
+.gRows{
+    font-size: 12px;
+}
+.actionButtons{
+    min-width: 60px;
+}
+.errors{
+    color:red;
+    text-align: center;
+    font-weight: 600;
+}
+.modifyDem{
+    margin-left:10px;
+    margin-top:10px;
 }

@@ -46,3 +46,15 @@ ion-content {
 .modal-test ion-content {
     --background: #97bae000;
 }
+ion-alert.select-alert .select-garantie {
+    .sc-ion-alert-md{
+    overflow-x: hidden ;
+    white-space:nowrap;
+    text-overflow: clip;
+    transition: text-indent 1s linear;
+    }
+    .sc-ion-alert-md:hover {
+        text-indent: -90px;
+    }
+      
+}
