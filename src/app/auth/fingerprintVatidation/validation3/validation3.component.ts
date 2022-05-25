@@ -21,10 +21,14 @@ export class Validation3Component implements OnInit {
 
   setCredential() {
     // Save user's credentials
+    let user = sessionStorage.getItem("user");
+    let psw = sessionStorage.getItem("psw");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("psw");
     NativeBiometric.setCredentials({
-      username: 'username',
-      password: 'password',
-      server: 'www.example.com',
+      username: user,
+      password: psw,
+      server: 'www.gti.com',
     }).then();
   }
   associate() {
