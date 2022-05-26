@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group(
       {
-        email: ['', Validators.required],
+        id: ['', Validators.required],
         password: ['', Validators.required],
         checked: [false],
       },
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginUser).subscribe((response) => {
         if (response.roles.some(i => i.libelle == "ROLE_Demande Credit Client")) {
           this.tokenService.setToken(response.token);
-          sessionStorage.setItem("user", loginUser.email);
+          sessionStorage.setItem("user", loginUser.id);
           sessionStorage.setItem("psw", loginUser.password);
           this.routingpage();
         } else {

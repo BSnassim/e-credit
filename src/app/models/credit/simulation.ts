@@ -1,5 +1,5 @@
 export class Simulation {
-  idUser: number;
+  idUser: string;
   nom: string;
   idSim: number;
   prenom: string;
