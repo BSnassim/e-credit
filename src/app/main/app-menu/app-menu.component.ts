@@ -15,11 +15,7 @@ export class AppMenuComponent implements OnInit {
 
   public appPages = [
     { title: 'Accueil', url: '/accueil', icon: 'home' },
-    {
-      title: 'Notifications',
-      url: '/credit/notification',
-      icon: 'notifications',
-    },
+    { title: 'Notifications', url: '/credit/notification', icon: 'notifications'},
     { title: 'Mes credits', url: '/credit/mescredits', icon: 'bar-chart' },
     { title: 'Demander un credit', url: '/credit/simulation', icon: 'create' },
   ];
@@ -29,7 +25,7 @@ export class AppMenuComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     private events: EventsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getUser();

@@ -2,7 +2,7 @@ import { Agence } from './credit/agence';
 import { Profil } from './profil';
 
 export class User {
-  id?: number;
+  id?: string;
   nom: string;
   prenom: string;
   password: string;

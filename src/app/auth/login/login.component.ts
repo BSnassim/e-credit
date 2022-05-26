@@ -6,6 +6,7 @@ import { LoginUser } from 'src/app/models/login-user';
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 import { NavController } from '@ionic/angular';
+import { AvailableResult, NativeBiometric } from 'capacitor-native-biometric';
 
 // import {
 //   AvailableResult,
@@ -36,9 +37,23 @@ export class LoginComponent implements OnInit {
     if (this.tokenService.getToken()) {
       this.router.navigate(['/']);
     }
+    
+    NativeBiometric.isAvailable().then(
+      (result: AvailableResult) => {
+        const isAvailable = result.isAvailable;
+    
+        if (isAvailable) {
+          // Get user's credentials
+          NativeBiometric.getCredentials({
+            server: "www.example.com",
+          }).then((credentials) => {
+            // Authenticate using biometrics before logging the user in
+          });
+        }});
+
     this.loginForm = this.formBuilder.group(
       {
-        email: ['', Validators.required],
+        id: ['', Validators.required],
         password: ['', Validators.required],
         checked: [false],
       },
@@ -54,37 +69,39 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.value.checked) {
       loginUser = { ...this.loginForm.value };
       this.authService.login(loginUser).subscribe((response) => {
-        if(response.roles.some( i => i.libelle == "ROLE_Demande Credit Client")){
-        this.tokenService.setToken(response.token);
-        this.routingpage();
-        } else{
+        if (response.roles.some(i => i.libelle == "ROLE_Demande Credit Client")) {
+          this.tokenService.setToken(response.token);
+          sessionStorage.setItem("user", loginUser.id);
+          sessionStorage.setItem("psw", loginUser.password);
+          this.routingpage();
+        } else {
           this.errors = "Vous n'étes pas autorisé à utiliser cette application"
         }
-      }, 
-      (error) => {
-        console.log("error");
-        this.errors = error;
-      });
+      },
+        (error) => {
+          console.log("error");
+          this.errors = error;
+        });
     }
     if (!this.loginForm.value.checked) {
       loginUser = { ...this.loginForm.value };
       this.authService.login(loginUser).subscribe((response) => {
-        if(response.roles.some( i => i.libelle == "ROLE_Demande Credit Client")){
-        this.tokenService.setToken(response.token);
-      } else{
-        this.errors = "Vous n'étes pas autorisé à utiliser cette application"
-      }
+        if (response.roles.some(i => i.libelle == "ROLE_Demande Credit Client")) {
+          this.tokenService.setToken(response.token);
+        } else {
+          this.errors = "Vous n'étes pas autorisé à utiliser cette application"
+        }
       },
-      (error) => {
-        if(error.status === 0)
-        this.errors = "Aucune connexion internet";
-        else if(error.status.toString()[0] === '4')
-        this.errors = "Identifiant ou mot de passe invalide";
-      },
-      () => {
-        this.router.navigate(['/']);
-        this.events.loginReport();
-      }
+        (error) => {
+          if (error.status === 0)
+            this.errors = "Aucune connexion internet";
+          else if (error.status.toString()[0] === '4')
+            this.errors = "Identifiant ou mot de passe invalide";
+        },
+        () => {
+          this.router.navigate(['/']);
+          this.events.loginReport();
+        }
       );
     }
   }

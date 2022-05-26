@@ -68,7 +68,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
     return res;
   }
 
-  getDemandesByUser(id: number) {
+  getDemandesByUser(id: string) {
     this.demandeCreditService.getDemandesByUser(id).subscribe((data) => {
       data.forEach((e) => {
         this.getPhase(e.idPhase).then((res) => {

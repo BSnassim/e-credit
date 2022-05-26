@@ -529,7 +529,7 @@ export class FormCreditComponent implements OnInit {
       this.demande = d;
       this.demande.garantie = this.garanties;
       this.demande.idUser = this.User.id;
-      this.demande.userName = this.User.nom + " " + this.User.prenom;
+      this.demande.changerId = this.User.id;
       this.demande.pieces = this.selected;
       this.demandeService.getDemandeExistsAPI(this.demande.numPiece).subscribe(response => {
         if (response) {
@@ -544,7 +544,7 @@ export class FormCreditComponent implements OnInit {
       this.demande.pieces = this.selected;
       this.demande.garantie = this.garanties;
       this.demande.idPhase = 5;
-      this.demande.userName = this.User.nom + " " + this.User.prenom;
+      this.demande.changerId = this.User.id;
       this.demandeService.putDemande(this.demande).subscribe();
       this.router.navigate(['/credit/mescredits']);
       window.location.reload();

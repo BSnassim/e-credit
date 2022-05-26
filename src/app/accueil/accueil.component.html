@@ -8,18 +8,21 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <div id="container">
-    <h2>Timeline</h2>
-
-    <h5 style="margin-top: 5em">Horizontal - Alternate Align</h5>
-    <!-- <p-timeline
-      [value]="horizontalEvents"
-      layout="horizontal"
-      align="alternate"
-    > -->
-    <ng-template pTemplate="content" let-event>
-      {{ event }}
-    </ng-template>
-    <ng-template pTemplate="opposite" let-event> &nbsp; </ng-template>
+    
     <!-- </p-timeline> -->
+    <div class="menuButtons">
+      <ion-card button="true" routerLink="/credit/notification" >
+        <ion-icon name="notifications"></ion-icon>
+        <div class="buttonText">Notification</div>
+      </ion-card>
+      <ion-card button="true" routerLink="/credit/mescredits">
+        <ion-icon name="bar-chart"></ion-icon>
+        <div class="buttonText">Mes credits</div>
+      </ion-card>
+      <ion-card button="true" routerLink="/credit/simulation">
+        <ion-icon name="create"></ion-icon>
+        <div class="buttonText">Demander un credit</div>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

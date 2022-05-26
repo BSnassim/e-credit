@@ -112,7 +112,7 @@ export class SimulationComponent implements OnInit {
 
   simulation = {} as Simulation;
 
-  UserId: number;
+  UserId: string;
 
   constructor(
     private formBuilder: FormBuilder,

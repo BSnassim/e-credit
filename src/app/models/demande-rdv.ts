@@ -3,5 +3,5 @@ export class DemandeRdv {
   title?: string;
   dateRdv?: Date;
   idDemande?: number;
-  idUser?: number;
+  idUser?: string;
 }

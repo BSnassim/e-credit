@@ -20,8 +20,8 @@ export class Demande {
   complement?: string;
   garantie?: Garantie[];
   pieces?: PieceJointes[];
-  idUser?: number;
-  userName?: string;
+  idUser?: string;
+  changerId?: string;
   gsm?: number;
   idSimulation?: number;
 }
