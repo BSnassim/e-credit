@@ -13,18 +13,20 @@
         <form (submit)="login()" [formGroup]="loginForm" name="loginForm">
           <ion-item>
             <ion-label position="floating">Identificateur</ion-label>
-            <ion-input type="email" formControlName="id"></ion-input>
+            <ion-input type="email" inputmode="numeric" formControlName="id"></ion-input>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="!savedUser">
             <ion-label position="floating">Mot de passe</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
-          <div class="bios">
+          <div class="bios" *ngIf="!savedUser">
             <span id="bio">Login avec empreinte</span>
             <ion-toggle formControlName="checked" color="tertiary"></ion-toggle>
           </div>
-          
-          <ion-button (click)="routingpage()"> validation1 page </ion-button>
+          <div>
+            <a *ngIf="savedUser" (click)="backToNormal()" id="link">Changer l'utilisateur</a>
+            <a *ngIf="savedUser" (click)="backToNormal()" id="link">Login avec mot de passe</a>
+          </div>
           <ion-button type="submit">Login</ion-button>
           <p class="errors">{{errors}}</p>
         </form>
