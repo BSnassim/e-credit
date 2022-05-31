@@ -15,9 +15,9 @@
     <div *ngFor="let event of events">
       <ion-item>
         <ion-label>
-          <span
-            >Rendez vous avec le chargé de la banque pour la demande N°
-            {{ event.idDemande }}</span
+          <div
+            >Rendez vous avec le chargé de la banque pour <br> la demande N°
+            {{ event.idDemande }}</div
           ><br />
           <span class="date">
             le: {{ event.dateRdv | date: "dd/MM/yyyy-HH:mm" }} </span

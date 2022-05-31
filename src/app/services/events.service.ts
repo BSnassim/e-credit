@@ -21,7 +21,7 @@ export class EventsService {
     this.login.next(false);
   }
 
-  getRdvByIdUserAPI(id: number) {
+  getRdvByIdUserAPI(id: string) {
     return this.http.get<any>(this.baseUrl1 + '/rdv/' + id);
   }
 }

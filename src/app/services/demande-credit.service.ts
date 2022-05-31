@@ -20,7 +20,7 @@ export class DemandeCreditService {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   baseUrl = environment.apiURL + '/credit';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // demande
   postDemandeAPI(demande: Demande, listGarantie: Garantie[]) {
@@ -142,4 +142,11 @@ export class DemandeCreditService {
   getAllHistoriqueByDemande(id: number) {
     return this.http.get<any[]>(this.baseUrl + '/historique/ByDemande/' + id);
   }
+
+  getHistoriqueDemandeRecente(id: string) {
+    return this.http.get<any[]>(
+      this.baseUrl + "/historique/DemandeRecente/ByUser/" + id
+    );
+  }
+
 }
