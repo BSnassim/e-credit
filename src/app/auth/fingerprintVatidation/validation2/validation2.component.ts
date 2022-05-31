@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NativeBiometric } from 'capacitor-native-biometric';
 
 @Component({
   selector: 'app-validation2',
@@ -11,7 +12,22 @@ export class Validation2Component implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setCredential();
+  }
+
+  setCredential() {
+    // Save user's credentials
+    let user = sessionStorage.getItem("user");
+    let psw = sessionStorage.getItem("psw");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("psw");
+    NativeBiometric.setCredentials({
+      username: user,
+      password: psw,
+      server: 'www.gti.com',
+    }).then();
+  }
 
   routingpage3() {
     this.router.navigate(['/validation3']);
