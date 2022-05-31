@@ -13,28 +13,29 @@
         <form (submit)="login()" [formGroup]="loginForm" name="loginForm">
           <ion-item>
             <ion-label position="floating">Identificateur</ion-label>
-            <ion-input type="email" inputmode="numeric" formControlName="id"></ion-input>
+            <ion-input type="text" pattern="[0-9]*" inputmode="numeric" formControlName="id"></ion-input>
           </ion-item>
           <ion-item *ngIf="!savedUser">
             <ion-label position="floating">Mot de passe</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
-          <div class="bios" *ngIf="!savedUser">
+          <div class="bios" *ngIf="!differentUser">
             <span id="bio">Login avec empreinte</span>
             <ion-toggle formControlName="checked" color="tertiary"></ion-toggle>
           </div>
           <div>
-            <a *ngIf="savedUser" (click)="backToNormal()" id="link">Changer l'utilisateur</a>
-            <a *ngIf="savedUser" (click)="backToNormal()" id="link">Login avec mot de passe</a>
+            <a *ngIf="differentUser" (click)="changeUser()" class="link">Changer l'utilisateur</a><br>
+            <a *ngIf="differentUser && !savedUser" (click)="backToFP()" class="link">Login avec empreinte</a>
+            <a *ngIf="savedUser" (click)="backToNormal()" class="link">Login avec mot de passe</a>
           </div>
           <ion-button type="submit">Login</ion-button>
           <p class="errors">{{errors}}</p>
         </form>
       </ion-card-content>
     </ion-card>
-    <ion-footer collapse="fade">
+    <img *ngIf="savedUser" src="assets/icon/finger2.png" alt="Fingerprint.png" class="img">
+    <ion-footer class="footer" collapse="fade">
       <ion-title><small>&#169; GTI - 2022</small></ion-title>
-      <!-- {{ loginForm.value | json }} -->
     </ion-footer>
   </div>
 </ion-content>

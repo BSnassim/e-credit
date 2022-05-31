@@ -50,6 +50,9 @@ export class Validation3Component implements OnInit {
     });
   }
   plusTard3() {
+    NativeBiometric.deleteCredentials({
+      server:"www.gti.com"
+    }).then();
     this.router.navigate(['/']);
   }
 }

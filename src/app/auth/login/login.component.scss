@@ -1,3 +1,8 @@
+#container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 ion-content {
     --background: rgb(8, 19, 38);
     --background: linear-gradient(53deg, rgba(8, 19, 38, 1) 1%, rgba(17, 42, 105, 1) 33%, rgba(42, 145, 223, 1) 100%);
@@ -17,12 +22,12 @@ ion-button {
     justify-content: center;
 }
 .logos {
-    margin-top: 20%;
+    margin-top: 17%;
     display: flex;
     justify-content: center;
 }
 ion-img.logo {
-    width:100%;
+    width: 100%;
 }
 ion-img.name {
     margin-left: 5px;
@@ -32,8 +37,7 @@ ion-img.name {
 ion-footer {
     color: white;
     text-align: center;
-    position:fixed;
-    bottom:0;
+    margin-top: auto;
 }
 .bios {
     height: 20px;
@@ -45,12 +49,19 @@ ion-toggle {
     margin-top: 10px;
     float: left;
 }
-.errors{
-    color:red;
+.errors {
+    color: red;
     text-align: center;
     font-weight: 600;
 }
-#link{
+.link {
     text-decoration: underline;
-    color:red;
+    color: rgb(233, 114, 114);
+    margin-top: 10px;
+}
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

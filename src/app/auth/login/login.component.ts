@@ -22,9 +22,13 @@ import { AvailableResult, NativeBiometric } from 'capacitor-native-biometric';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
+  pw: string;
+
   errors = "";
 
   savedUser = false;
+
+  differentUser = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,9 +59,11 @@ export class LoginComponent implements OnInit {
       if (credentials) {
         this.loginForm.controls.id.setValue(credentials.username);
         this.loginForm.controls.password.setValue(credentials.password);
+        this.pw = credentials.password;
         this.loginForm.controls.id.disable();
         this.loginForm.controls.password.disable();
         this.savedUser = true;
+        this.differentUser = true;
       }
     });
 
@@ -67,6 +73,24 @@ export class LoginComponent implements OnInit {
     this.savedUser = false;
     this.loginForm.controls.password.enable();
     this.loginForm.controls.password.setValue("");
+  }
+
+  backToFP() {
+    this.savedUser = true;
+    this.loginForm.controls.password.enable();
+    this.loginForm.controls.password.setValue(this.pw);
+  }
+
+  changeUser() {
+    this.differentUser = false;
+    this.savedUser = false;
+    this.loginForm.controls.password.enable();
+    this.loginForm.controls.password.setValue("");
+    this.loginForm.controls.id.enable();
+    this.loginForm.controls.id.setValue("");
+    NativeBiometric.deleteCredentials({
+      server: "www.gti.com"
+    }).then();
   }
 
   routingpage() {
@@ -132,8 +156,7 @@ export class LoginComponent implements OnInit {
           }
         },
           (error) => {
-            console.log("error");
-            this.errors = error;
+            this.errors = "Une erreur est survenue";
           });
       }
       if (!this.loginForm.getRawValue().checked) {
