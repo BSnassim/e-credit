@@ -1,3 +1,4 @@
+import { TokenService } from 'src/app/auth/services/token.service';
 import { Component, OnInit } from '@angular/core';
 import { DemandeRdv } from 'src/app/models/demande-rdv';
 
@@ -13,12 +14,19 @@ export class NotificationComponent implements OnInit {
 
   events: DemandeRdv[] = [];
 
-  constructor(private eventsService: EventsService) {}
+  constructor(private eventsService: EventsService, private tokenService: TokenService) {}
 
   ngOnInit() {
-    this.getEvent(2);
+    this.getUserId();
   }
-  getEvent(id: number) {
+
+getUserId(){
+  this.tokenService.getUser().subscribe( user => {
+    this.getEvent(user.id);
+  })
+}
+
+  getEvent(id: string) {
     this.eventsService.getRdvByIdUserAPI(id).subscribe((data) => {
       this.events = data;
     });

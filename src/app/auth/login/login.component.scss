@@ -54,10 +54,15 @@ ion-toggle {
     text-align: center;
     font-weight: 600;
 }
+.links{
+    display:flex;
+    flex-direction: column;
+}
 .link {
     text-decoration: underline;
-    color: rgb(233, 114, 114);
+    color: white;
     margin-top: 10px;
+    margin-left: 20px;
 }
 .img {
     display: block;
