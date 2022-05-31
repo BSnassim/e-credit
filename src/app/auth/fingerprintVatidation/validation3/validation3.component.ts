@@ -11,26 +11,12 @@ import { AvailableResult, NativeBiometric } from 'capacitor-native-biometric';
 export class Validation3Component implements OnInit {
   isVisible = false;
 
-  constructor(private router: Router, public navCtrl: NavController) {}
+  constructor(private router: Router, public navCtrl: NavController) { }
 
   ngOnInit() {
-    // this.setCredential();
     this.associate();
-    console.log(this.isVisible);
   }
 
-  setCredential() {
-    // Save user's credentials
-    let user = sessionStorage.getItem("user");
-    let psw = sessionStorage.getItem("psw");
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("psw");
-    NativeBiometric.setCredentials({
-      username: user,
-      password: psw,
-      server: 'www.gti.com',
-    }).then();
-  }
   associate() {
     NativeBiometric.isAvailable().then((result: AvailableResult) => {
       const isAvailable = result.isAvailable;
@@ -41,7 +27,7 @@ export class Validation3Component implements OnInit {
       if (isAvailable) {
         // Get user's credentials
         NativeBiometric.getCredentials({
-          server: 'www.example.com',
+          server: 'www.gti.com',
         }).then((credentials) => {
           // alert('CREDENTIAL ' + JSON.stringify(credentials));
           // Authenticate using biometrics before logging the user in
@@ -64,6 +50,9 @@ export class Validation3Component implements OnInit {
     });
   }
   plusTard3() {
+    NativeBiometric.deleteCredentials({
+      server:"www.gti.com"
+    }).then();
     this.router.navigate(['/']);
   }
 }

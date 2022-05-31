@@ -20,6 +20,8 @@ import { Validation1Component } from './auth/fingerprintVatidation/validation1/v
 import { Validation2Component } from './auth/fingerprintVatidation/validation2/validation2.component';
 import { Validation3Component } from './auth/fingerprintVatidation/validation3/validation3.component';
 import { NotificationComponent } from './credit/notification/notification.component';
+import { LibPhasePipe } from './pipes/lib-phase.pipe';
+import { IdUserToUsernamePipe } from './pipes/id-user-to-username.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { NotificationComponent } from './credit/notification/notification.compon
     FormCreditComponent,
     SimulationComponent,
     NotificationComponent,
+    LibPhasePipe,
+    IdUserToUsernamePipe,
   ],
   entryComponents: [],
   imports: [

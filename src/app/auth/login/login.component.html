@@ -5,34 +5,33 @@
       <ion-img class="logo" [src]="'assets/images/logo3-light.png'"></ion-img>
     </div>
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>Authentification</ion-card-title>
-      </ion-card-header>
-
       <ion-card-content>
         <form (submit)="login()" [formGroup]="loginForm" name="loginForm">
           <ion-item>
-            <ion-label position="floating">Identificateur</ion-label>
-            <ion-input type="email" formControlName="id"></ion-input>
+            <ion-label position="floating">Identifiant</ion-label>
+            <ion-input type="text" pattern="[0-9]*" inputmode="numeric" formControlName="id"></ion-input>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="!savedUser">
             <ion-label position="floating">Mot de passe</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
-          <div class="bios">
+          <div class="bios" *ngIf="!differentUser">
             <span id="bio">Login avec empreinte</span>
             <ion-toggle formControlName="checked" color="tertiary"></ion-toggle>
           </div>
-          
-          <ion-button (click)="routingpage()"> validation1 page </ion-button>
-          <ion-button type="submit">Login</ion-button>
+          <ion-button type="submit">S'authentifier</ion-button>
           <p class="errors">{{errors}}</p>
         </form>
       </ion-card-content>
     </ion-card>
-    <ion-footer collapse="fade">
+    <div class="links">
+      <a *ngIf="differentUser" (click)="changeUser()" class="link">Utiliser un autre compte</a><br>
+      <a *ngIf="differentUser && !savedUser" (click)="backToFP()" class="link">Se connecter avec empreinte</a>
+      <a *ngIf="savedUser" (click)="backToNormal()" class="link">Se connecter avec mot de passe</a>
+    </div>
+    
+    <ion-footer class="footer" collapse="fade">
       <ion-title><small>&#169; GTI - 2022</small></ion-title>
-      <!-- {{ loginForm.value | json }} -->
     </ion-footer>
   </div>
 </ion-content>
