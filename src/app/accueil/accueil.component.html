@@ -8,7 +8,6 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <div id="container">
-
     <div class="menuButtons">
       <ion-card button="true" routerLink="/credit/notification">
         <ion-icon class="menuIcon" name="notifications"></ion-icon>
@@ -27,27 +26,52 @@
     <!-- User timeline -->
     <h2 class="timeTitle">Le timeline de votre demande</h2>
     <div class="timeline" *ngFor="let event of historiques">
-      <ion-icon *ngIf="event.idPhase == 1" class="icon" style="color:rgba(228, 0, 123, 1);" name="download-outline"></ion-icon>
-      <ion-icon *ngIf="event.idPhase == 2" class="icon" style="color:rgba(2, 217, 7, 0.82);" name="checkmark-circle-outline"></ion-icon>
-      <ion-icon *ngIf="event.idPhase == 3" class="icon" style="color:rgba(255, 0, 0, 1);" name="close-circle-outline"></ion-icon>
-      <ion-icon *ngIf="event.idPhase == 4" class="icon" style="color:rgba(186, 0, 255, 1);" name="add-circle-outline"></ion-icon>
-      <ion-icon *ngIf="event.idPhase == 5" class="icon" style="color:rgba(0, 186, 255, 1);" name="pencil-outline"></ion-icon>
+      <ion-icon
+        *ngIf="event.idPhase === 1"
+        class="icon"
+        style="color: rgba(228, 0, 123, 1)"
+        name="download-outline"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="event.idPhase === 2"
+        class="icon"
+        style="color: rgba(2, 217, 7, 0.82)"
+        name="checkmark-circle-outline"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="event.idPhase === 3"
+        class="icon"
+        style="color: rgba(255, 0, 0, 1)"
+        name="close-circle-outline"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="event.idPhase === 4"
+        class="icon"
+        style="color: rgba(186, 0, 255, 1)"
+        name="add-circle-outline"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="event.idPhase === 5"
+        class="icon"
+        style="color: rgba(0, 186, 255, 1)"
+        name="pencil-outline"
+      ></ion-icon>
       <div class="event">
         <h5 class="title">
           {{ event.idPhase | libPhase | async }}
         </h5>
-        <span class="faitPar">Fait par
+        <span class="faitPar"
+          >Fait par
           {{ event.userId | idUserToUsername | async }}
         </span>
         <br />
         <br />
         <span class="eventDate">
           <div>
-            {{event.datePhase | date: 'dd/MM/yyyy'}}
+            {{ event.datePhase | date: "dd/MM/yyyy" }}
           </div>
         </span>
       </div>
     </div>
-
   </div>
 </ion-content>

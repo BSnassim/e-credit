@@ -10,7 +10,6 @@ import { Historique } from '../models/historique';
   styleUrls: ['./accueil.component.scss'],
 })
 export class AccueilComponent implements OnInit {
-
   historiques: Historique[] = [];
 
   currentUser: User = new User();
@@ -19,15 +18,17 @@ export class AccueilComponent implements OnInit {
 
   constructor(
     private tokenService: TokenService,
-    private creditService: DemandeCreditService) { }
+    private creditService: DemandeCreditService
+  ) {}
 
   ngOnInit() {
     this.loadUser();
   }
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   LoadHistoriqueDemande(id: string) {
     this.creditService.getHistoriqueDemandeRecente(id).subscribe((data) => {
-        this.historiques = data;
+      this.historiques = data;
     });
   }
 
@@ -38,5 +39,4 @@ export class AccueilComponent implements OnInit {
       this.LoadHistoriqueDemande(data.id);
     });
   }
-
 }
