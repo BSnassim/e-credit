@@ -85,14 +85,14 @@
       <ion-item button="true" id="dateCompte" class="bubble">
         <ion-label>Date ouverture de compte</ion-label>
         <ion-text slot="end">{{ simulation.dateCompte | date:"dd/MM/yyyy" }}</ion-text>
-        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateCompte">
-          <ng-template>
-            <ion-datetime #modalDatetime1 presentation="date" formControlName="dateCompte"
-              (ionChange)="simulation.dateCompte = formatDate(modalDatetime1.value)">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
       </ion-item>
+      <ion-modal trigger="dateCompte" class="modal-date">
+        <ng-template>
+          <ion-datetime #modalDatetime1 presentation="date" formControlName="dateCompte"
+            (ionChange)="simulation.dateCompte = formatDate(modalDatetime1.value)" showDefaultButtons="true" size="cover">
+          </ion-datetime>
+        </ng-template>
+      </ion-modal>
       <ng-container *ngFor="let validation of validation_messages.dateCompte">
         <div class="error-message"
           *ngIf="simForm.get('dateCompte').hasError(validation.type) && (simForm.get('dateCompte').dirty || simForm.get('dateCompte').touched)">
@@ -103,10 +103,10 @@
       <ion-item button="true" id="dateNais" class="bubble">
         <ion-label>Date de naissance</ion-label>
         <ion-text slot="end">{{ simulation.dateNaissance | date:"dd/MM/yyyy" }}</ion-text>
-        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateNais">
+        <ion-modal class="modal-date" trigger="dateNais">
           <ng-template>
             <ion-datetime #modalDatetime presentation="date" formControlName="dateNaissance"
-              (ionChange)="simulation.dateNaissance = formatDate(modalDatetime.value)">
+              (ionChange)="simulation.dateNaissance = formatDate(modalDatetime.value)" showDefaultButtons="true" size="cover">
             </ion-datetime>
           </ng-template>
         </ion-modal>

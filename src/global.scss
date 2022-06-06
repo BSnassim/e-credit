@@ -56,5 +56,16 @@ ion-alert.select-alert .select-garantie {
     .sc-ion-alert-md:hover {
         text-indent: -90px;
     }
-      
+}
+.modal-date{
+    padding-top: 25vh;
+    padding-left:20px;
+    padding-right:20px;
+    --background: #97bae000;
+    ion-datetime{
+        border-radius: 8px;
+    }
+}
+.modal-date ion-content {
+    --background: #97bae000;
 }
