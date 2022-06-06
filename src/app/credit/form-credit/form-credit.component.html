@@ -89,9 +89,9 @@
       <ion-item button="true" id="dateCompte" class="bubble">
         <ion-label>Date ouverture de compte</ion-label>
         <ion-text slot="end">{{ demande.dateCompte | date:"dd/MM/yyyy" }}</ion-text>
-        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateCompte">
+        <ion-modal class="modal-date" trigger="dateCompte">
           <ng-template>
-            <ion-datetime #modalDatetime1 presentation="date" formControlName="dateCompte"
+            <ion-datetime #modalDatetime1 presentation="date" formControlName="dateCompte" showDefaultButtons="true" size="cover"
               (ionChange)="demande.dateCompte = formatDate(modalDatetime1.value)">
             </ion-datetime>
           </ng-template>
@@ -107,9 +107,9 @@
       <ion-item button="true" id="dateNais" class="bubble">
         <ion-label>Date de naissance</ion-label>
         <ion-text slot="end">{{ demande.dateNaissance | date:"dd/MM/yyyy" }}</ion-text>
-        <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" trigger="dateNais">
+        <ion-modal class="modal-date" trigger="dateNais">
           <ng-template>
-            <ion-datetime #modalDatetime presentation="date" formControlName="dateNaissance"
+            <ion-datetime #modalDatetime presentation="date" formControlName="dateNaissance" showDefaultButtons="true" size="cover"
               (ionChange)="demande.dateNaissance = formatDate(modalDatetime.value)">
             </ion-datetime>
           </ng-template>
