@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import { Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,22 @@ import { StatusBar, Style } from '@capacitor/status-bar';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  showSplash = true;
+
   constructor() {}
 
   ngOnInit() {
     this.initializeApp();
   }
-  async initializeApp() {
-    await StatusBar.setStyle({ style: Style.Dark });
-    await SplashScreen.hide();
-    await SplashScreen.show({
-      showDuration: 3000,
-      autoHide: true,
-    });
+  initializeApp() {
+    // Platform.ready().then(() => {
+    StatusBar.setStyle({ style: Style.Dark });
+    SplashScreen.hide();
+    timer(3000).subscribe(() => (this.showSplash = false));
+    // SplashScreen.show({
+    //   showDuration: 3000,
+    //   autoHide: true,
+    // });
+    // });
   }
 }
