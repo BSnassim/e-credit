@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable eqeqeq */
+/* eslint-disable curly */
+/* eslint-disable @typescript-eslint/quotes */
 import { EventsService } from './../../services/events.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   pw: string;
 
-  errors = "";
+  errors = '';
 
   savedUser = false;
 
@@ -37,7 +41,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     public navCtrl: NavController,
     private events: EventsService
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (this.tokenService.getToken()) {
@@ -46,15 +50,15 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group(
       {
-        id: ["", Validators.required],
-        password: ["", Validators.required],
+        id: ['', Validators.required],
+        password: ['', Validators.required],
         checked: [false],
       },
       { updateOn: 'submit' }
     );
     // Get user's credentials
     NativeBiometric.getCredentials({
-      server: "www.gti.com",
+      server: 'www.gti.com',
     }).then((credentials) => {
       if (credentials) {
         this.loginForm.controls.id.setValue(credentials.username);
@@ -66,13 +70,12 @@ export class LoginComponent implements OnInit {
         this.differentUser = true;
       }
     });
-
   }
 
   backToNormal() {
     this.savedUser = false;
     this.loginForm.controls.password.enable();
-    this.loginForm.controls.password.setValue("");
+    this.loginForm.controls.password.setValue('');
   }
 
   backToFP() {
@@ -85,11 +88,11 @@ export class LoginComponent implements OnInit {
     this.differentUser = false;
     this.savedUser = false;
     this.loginForm.controls.password.enable();
-    this.loginForm.controls.password.setValue("");
+    this.loginForm.controls.password.setValue('');
     this.loginForm.controls.id.enable();
-    this.loginForm.controls.id.setValue("");
+    this.loginForm.controls.id.setValue('');
     NativeBiometric.deleteCredentials({
-      server: "www.gti.com"
+      server: 'www.gti.com',
     }).then();
   }
 
@@ -115,18 +118,24 @@ export class LoginComponent implements OnInit {
             .then(() => {
               //     // Authentication successful
               loginUser = { ...this.loginForm.getRawValue() };
-              this.authService.login(loginUser).subscribe((response) => {
-                if (response.roles.some(i => i.libelle == "ROLE_Demande Credit Client")) {
-                  this.tokenService.setToken(response.token);
-                } else {
-                  this.errors = "Vous n'étes pas autorisé à utiliser cette application"
-                }
-              },
+              this.authService.login(loginUser).subscribe(
+                (response) => {
+                  if (
+                    response.roles.some(
+                      (i) => i.libelle == 'ROLE_Demande Credit Client'
+                    )
+                  ) {
+                    this.tokenService.setToken(response.token);
+                  } else {
+                    this.errors =
+                      "Vous n'étes pas autorisé à utiliser cette application";
+                  }
+                },
                 (error) => {
                   if (error.status === 0)
-                    this.errors = "Aucune connexion internet";
+                    this.errors = 'Aucune connexion internet';
                   else if (error.status.toString()[0] === '4')
-                    this.errors = "Identifiant ou mot de passe invalide";
+                    this.errors = 'Identifiant ou mot de passe invalide';
                 },
                 () => {
                   this.router.navigate(['/']);
@@ -136,43 +145,53 @@ export class LoginComponent implements OnInit {
             })
             .catch((err) => {
               // Failed to authenticate
-              this.errors = "Empreinte non reconnue. Veuillez réessayer";
+              this.errors = 'Empreinte non reconnue. Veuillez réessayer';
             });
-
         }
       });
     } else {
-
       if (this.loginForm.getRawValue().checked) {
         loginUser = { ...this.loginForm.getRawValue() };
-        this.authService.login(loginUser).subscribe((response) => {
-          if (response.roles.some(i => i.libelle == "ROLE_Demande Credit Client")) {
-            this.tokenService.setToken(response.token);
-            sessionStorage.setItem("user", loginUser.id);
-            sessionStorage.setItem("psw", loginUser.password);
-            this.routingpage();
-          } else {
-            this.errors = "Vous n'étes pas autorisé à utiliser cette application"
-          }
-        },
+        this.authService.login(loginUser).subscribe(
+          (response) => {
+            if (
+              response.roles.some(
+                (i) => i.libelle == 'ROLE_Demande Credit Client'
+              )
+            ) {
+              this.tokenService.setToken(response.token);
+              sessionStorage.setItem('user', loginUser.id);
+              sessionStorage.setItem('psw', loginUser.password);
+              this.routingpage();
+            } else {
+              this.errors =
+                "Vous n'étes pas autorisé à utiliser cette application";
+            }
+          },
           (error) => {
-            this.errors = "Une erreur est survenue";
-          });
+            this.errors = 'Une erreur est survenue';
+          }
+        );
       }
       if (!this.loginForm.getRawValue().checked) {
         loginUser = { ...this.loginForm.getRawValue() };
-        this.authService.login(loginUser).subscribe((response) => {
-          if (response.roles.some(i => i.libelle == "ROLE_Demande Credit Client")) {
-            this.tokenService.setToken(response.token);
-          } else {
-            this.errors = "Vous n'étes pas autorisé à utiliser cette application"
-          }
-        },
+        this.authService.login(loginUser).subscribe(
+          (response) => {
+            if (
+              response.roles.some(
+                (i) => i.libelle == 'ROLE_Demande Credit Client'
+              )
+            ) {
+              this.tokenService.setToken(response.token);
+            } else {
+              this.errors =
+                "Vous n'étes pas autorisé à utiliser cette application";
+            }
+          },
           (error) => {
-            if (error.status === 0)
-              this.errors = "Aucune connexion internet";
+            if (error.status === 0) this.errors = 'Aucune connexion internet';
             else if (error.status.toString()[0] === '4')
-              this.errors = "Identifiant ou mot de passe invalide";
+              this.errors = 'Identifiant ou mot de passe invalide';
           },
           () => {
             this.router.navigate(['/']);
