@@ -6,7 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  showSplash = true;
+
+  loading = false;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.loading = true;
+    }, 2000);
+  }
 }
